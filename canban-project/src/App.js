@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
-import TodoContainer from "./Components/Todo/TodoContainer"
+import BoardContainer from "./Components/Board/BoardContainer"
 function App() {
   return (
     <div className="App">
-      <TodoContainer/>
+      <BoardContainer/>
     </div>
   );
 }

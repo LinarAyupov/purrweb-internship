@@ -1,3 +1,10 @@
+html {
+	box-sizing: border-box;
+}
+* {
+	box-sizing: inherit;
+	padding: 0
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +17,48 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.board-wrap {
+	height: 100vh;
+	width: 100%;
+	background-color: #ccc;
+	padding: 10px
+}
+.canban-column {
+	position: relative;
+	width: 272px;
+	background-color: #fff;
+	border-radius: 3px;
+	display: inline-block;
+	padding: 20px 10px
+}
+.canban-column + .canban-column {
+	margin-left: 10px;
+}
+.canban-column__header {
+	min-height: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.canban-column__title {
+	font-size: 16px;
+	margin:0;
+}
+.canban-column_nav {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+.canban-column_nav-dot {
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	background-color: #000;
+	border-radius: 50%;
+}
+.canban-column_nav-dot + .canban-column_nav-dot {
+	margin-left: 5px;
+}
+.canban-column__footer-btn {
+	padding: 5px 10px;
 }

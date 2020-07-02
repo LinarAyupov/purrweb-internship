@@ -4,7 +4,9 @@ const CHANGED_INPUT_TEXT = 'CHANGED-INPUT-TEXT'
 
 let initialState = {
 	inputText:'',
-	taskCardsToDo: [ "some", "test"],}
+	taskCardsToDo: [ "some", "test"],
+}
+
 
 const todoColumn = (state = initialState, action) => {
 	switch (action.type) {
@@ -22,7 +24,6 @@ const todoColumn = (state = initialState, action) => {
 			return state;
 	}
 }
-
 export const setChangedInputText = (inputText) => {
 	return {
 		type: CHANGED_INPUT_TEXT,

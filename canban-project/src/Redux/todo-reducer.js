@@ -4,16 +4,18 @@ const CHANGED_INPUT_TEXT = 'CHANGED-INPUT-TEXT'
 
 let initialState = {
 	inputText:'',
-	taskCardsToDo: [ "some", "test"],
+	taskCardsToDo: [],
 }
 
 
 const todoColumn = (state = initialState, action) => {
 	switch (action.type) {
 		case 'SET-TASK-CARD' :
+		console.log(action.taskOptions)
 			return {
 				...state,
-				...state.taskCardsToDo.push(state.inputText) 
+				taskCardsToDo: [...state.taskCardsToDo, action.taskOptions],
+				inputText:''
 			}
 		case 'CHANGED-INPUT-TEXT':
 			return{
@@ -31,9 +33,10 @@ export const setChangedInputText = (inputText) => {
 	}
 }
 
-export const setTaskCard = () => {
+export const setTaskCard = (taskOptions) => {
 	return {
 		type: SET_TASK_CARD,
+		taskOptions
 	}
 }
 

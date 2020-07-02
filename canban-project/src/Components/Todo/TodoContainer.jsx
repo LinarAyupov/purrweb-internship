@@ -5,16 +5,17 @@ import {setTaskCard, setChangedInputText} from "../../Redux/todo-reducer"
 
 class TodoContainer extends React.Component {
 	
-	
 	render() {
 		return  <Todo setChangedInputText = {this.props.setChangedInputText} 
 					  inputText = {this.props.inputText}
-					  addTask = {this.props.setTaskCard}/>
+					  addTask = {this.props.setTaskCard}
+					  taskCards = {this.props.taskCards}
+					  />
 	}
 }
 const mapStateToProps = (state) => {
 	return {
-		taskTitle: state.todoData.taskCardsToDo,
+		taskCards: state.todoData.taskCardsToDo,
 		inputText: state.todoData.inputText
 	}
 }

@@ -3,7 +3,12 @@ import React from "react"
 const TaskCard = (props) => {
 	return (
 		<div className="task-card">
-		<h1>{props.taskTitle}</h1>
+			{
+			props.isEditActive === true?	
+			<input type="text" value = {props.taskTitle} />:
+			<h2 className="task-card__title" >{props.taskTitle}</h2>
+			}
+			<button onClick ={props.editTitile} className="task-card__edit-btn">e</button>
 		</div>
 		)
 }

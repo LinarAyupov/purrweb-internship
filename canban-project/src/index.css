@@ -63,3 +63,17 @@ code {
 	margin-top: 10px;
 	padding: 5px 10px;
 }
+.task-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-height: 50px;
+	padding:5px;
+}
+.task-card__edit-btn {
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+	border: 1px solid #000;
+	cursor: pointer;
+}

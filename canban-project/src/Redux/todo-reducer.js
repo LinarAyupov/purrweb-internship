@@ -2,9 +2,11 @@
 const SET_TASK_CARD = 'SET-TASK-CARD'
 const CHANGED_INPUT_TEXT = 'CHANGED-INPUT-TEXT'
 const EDIT_TASK_TITLE = 'EDIT-TASK-TITLE'
+const  EDIT_TITLE_TEXT = 'EDIT-TITLE-TEXT'
 
 let initialState = {
 	inputText:'',
+	newTaskCardTitle:'',
 	taskCardsToDo: [],
 }
 
@@ -26,12 +28,25 @@ const todoColumn = (state = initialState, action) => {
 			return {
 				...state,
 				...state.taskCardsToDo.forEach( task => {
-					if(task.id===action.taskId) {
-						task.isEditActive === true ? task.isEditActive = false: task.isEditActive = true
-					} 
+					if(task.id!==action.taskId) {
+						task.isEditActive = false
+						
+					} else {			
+						task.isEditActive === false ? task.isEditActive = true: task.isEditActive = false
+					}	
 				}),
 				taskCardsToDo:[...state.taskCardsToDo]
 			}
+			case 'EDIT-TITLE-TEXT': 
+				return {
+					...state,
+					...state.taskCardsToDo.forEach( task => {
+						if(task.id === action.taskId) {
+							task.title = action.newTaskTitleText
+						} 	
+					}),
+					taskCardsToDo:[...state.taskCardsToDo]
+				}
 		default:
 			return state;
 	}
@@ -53,6 +68,14 @@ export const onEditTaskTitle = (taskId) => {
 	return {
 		type: EDIT_TASK_TITLE,
 		taskId
+	}
+}
+export const editTitleText = (taskId,newTaskTitleText) => {
+	return {
+		type: EDIT_TITLE_TEXT,
+		taskId,
+		newTaskTitleText
+	
 	}
 }
 

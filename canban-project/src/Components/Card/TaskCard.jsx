@@ -5,7 +5,7 @@ const TaskCard = (props) => {
 		<div className="task-card">
 			{
 			props.isEditActive === true?	
-			<input type="text" value = {props.taskTitle} />:
+			<input type="text"onChange = {props.editTitleText} defaultValue ={props.taskTitle}/>:
 			<h2 className="task-card__title" >{props.taskTitle}</h2>
 			}
 			<button onClick ={props.editTitile} className="task-card__edit-btn">e</button>

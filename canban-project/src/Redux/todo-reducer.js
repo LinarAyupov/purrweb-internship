@@ -1,81 +1,62 @@
 
-const SET_TASK_CARD = 'SET-TASK-CARD'
-const CHANGED_INPUT_TEXT = 'CHANGED-INPUT-TEXT'
-const EDIT_TASK_TITLE = 'EDIT-TASK-TITLE'
-const  EDIT_TITLE_TEXT = 'EDIT-TITLE-TEXT'
+const SET_TODO_CARD = "SET-TODO-CARD"
+const SET_NEW_CARD_TITLE = "SET-NEW-CARD-TITLE"
+const INSERT_CARD_TITLE = "INSERT-CARD-TITLE"
 
 let initialState = {
-	inputText:'',
-	newTaskCardTitle:'',
-	taskCardsToDo: [],
+	cards:[]
 }
 
 
 const todoColumn = (state = initialState, action) => {
 	switch (action.type) {
-		case 'SET-TASK-CARD' :
+		case "SET-TODO-CARD":
 			return {
 				...state,
-				taskCardsToDo: [...state.taskCardsToDo, action.taskOptions],
-				inputText:''
+				cards:[...state.cards, action.cardItem]
 			}
-		case 'CHANGED-INPUT-TEXT':
-			return{
-				...state,
-				inputText: action.inputText
-			}
-		case 'EDIT-TASK-TITLE':
+		case "SET-NEW-CARD-TITLE": 
 			return {
 				...state,
-				...state.taskCardsToDo.forEach( task => {
-					if(task.id!==action.taskId) {
-						task.isEditActive = false
-						
-					} else {			
-						task.isEditActive === false ? task.isEditActive = true: task.isEditActive = false
-					}	
+				...state.cards.forEach(card => {
+                    if(card.cardId === action.cardId) {
+                        card.title = action.newTitle
+                    }
 				}),
-				taskCardsToDo:[...state.taskCardsToDo]
+				cards:[...state.cards]
 			}
-			case 'EDIT-TITLE-TEXT': 
-				return {
-					...state,
-					...state.taskCardsToDo.forEach( task => {
-						if(task.id === action.taskId) {
-							task.title = action.newTaskTitleText
-						} 	
-					}),
-					taskCardsToDo:[...state.taskCardsToDo]
-				}
+		case "INSERT-CARD-TITLE":
+			return {
+				...state,
+				...state.cards.forEach(card => {
+                    if(card.cardId === action.cardId) {
+                        card.isCardActive = true
+                    }
+				}),
+				cards:[...state.cards]
+			}
 		default:
 			return state;
 	}
 }
-export const setChangedInputText = (inputText) => {
-	return {
-		type: CHANGED_INPUT_TEXT,
-		inputText
-	}
-}
 
-export const setTaskCard = (taskOptions) => {
+export const setNewTodoCard = (cardItem) => {
 	return {
-		type: SET_TASK_CARD,
-		taskOptions
+		type: SET_TODO_CARD,
+		cardItem
 	}
 }
-export const onEditTaskTitle = (taskId) => {
+export const setNewCardTitle = (cardId,newTitle) => {
 	return {
-		type: EDIT_TASK_TITLE,
-		taskId
+		type: SET_NEW_CARD_TITLE,
+		cardId,
+		newTitle
 	}
 }
-export const editTitleText = (taskId,newTaskTitleText) => {
+export const insertCardTitle = (cardId) => {
 	return {
-		type: EDIT_TITLE_TEXT,
-		taskId,
-		newTaskTitleText
-	
+		type:INSERT_CARD_TITLE,
+		cardId
 	}
 }
 

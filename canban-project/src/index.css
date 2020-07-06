@@ -19,61 +19,74 @@ code {
     monospace;
 }
 .board-wrap {
-	height: 100vh;
-	width: 100%;
-	background-color: #ccc;
-	padding: 10px
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: #ccc;
+  padding: 30px 10px;
+  background-image: url('../src/Assets/canban-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
-.canban-column {
-	position: relative;
-	width: 272px;
-	background-color: #fff;
-	border-radius: 3px;
-	display: inline-block;
-	padding: 20px 10px
+.board__btn {
+  width: 272px;
+  height: 32px;
+  text-align: left;
+  color: #fff;
+  background-color: #C7ABA2;
+  border: none;
+  border-radius: 3px;
+  margin: 5px;
+  padding-left: 50px;
 }
-.canban-column + .canban-column {
-	margin-left: 10px;
+
+.todo-wrapper {
+  position: relative;
+  display: inline-block;
+  flex-direction: column;
+  width: 270px;
+  border-radius: 3px;
+  background-color: #ebecf0;
+  padding: 5px;
+  margin: 5px;
+  vertical-align: top;
 }
-.canban-column__header {
-	min-height: 20px;
-	display: flex;
-	justify-content: space-between;
+
+.todo-title {
+  margin:  0 0 10px 0;
+  line-height: 18px;
+  font-size: 20px;
+  padding: 5px 5px 8px;
 }
-.canban-column__title {
-	font-size: 16px;
-	margin:0;
+.todo-title__input,
+.todo-title,
+.todo-card__title,
+.todo-card__input  {
+  width: 100%;
+  border-radius: 3px;
 }
-.canban-column_nav {
-	display: flex;
-	align-items: center;
-	cursor: pointer;
+.todo-title__input,
+.todo-card__input {
+  border: none;
+  padding: 5px 5px 10px;
+  outline: none;
 }
-.canban-column_nav-dot {
-	display: inline-block;
-	width: 5px;
-	height: 5px;
-	background-color: #000;
-	border-radius: 50%;
+.todo-card + .todo-card {
+  margin-top: 10px;
 }
-.canban-column_nav-dot + .canban-column_nav-dot {
-	margin-left: 5px;
+.todo-card__title {
+  background-color: #fff;
+  padding: 10px;
 }
-.canban-column__footer-btn {
-	margin-top: 10px;
-	padding: 5px 10px;
-}
-.task-card {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	max-height: 50px;
-	padding:5px;
-}
-.task-card__edit-btn {
-	width: 20px;
-	height: 20px;
-	background-color: #fff;
-	border: 1px solid #000;
-	cursor: pointer;
+
+.todo-add__btn {
+  width: 130px;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #5aac44;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  outline: none;
 }

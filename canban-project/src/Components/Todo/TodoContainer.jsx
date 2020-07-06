@@ -1,56 +1,91 @@
 import React from "react"
 import Todo from "./Todo"
-import {connect} from "react-redux"
-import {setTaskCard, setChangedInputText, onEditTaskTitle,editTitleText} from "../../Redux/todo-reducer"
-import TaskCardContainer from "../Card/TaskCardContainer"
+import { connect } from "react-redux"
+import {setColumnTitle,insertNewColumnTitle} from "../../Redux/board-reducer.js"
+import {setNewTodoCard} from "../../Redux/todo-reducer.js"
+import TodoCardContainer from "../Card/TodoCardContainer"
+
 
 class TodoContainer extends React.Component {
-	setNewInputText (elem) {
-		let inputText = elem.target.value
-		this.props.setChangedInputText(inputText)
-	}
-	showCards () {
-		return this.props.taskCards.map((card, index) => {
-			return <TaskCardContainer 
-						taskTitle = {card.title} 
-						id = {card.id} 
-						key={index} 
-						isEditActive = {card.isEditActive}
-						onEditTaskTitle = {this.props.onEditTaskTitle}
-						editTitleText = {this.props.editTitleText}
-						newTaskTitle = {this.props.newTaskTitle}
-						/>
+	constructor(props) {
+		super(props)
+		this.column = {}
+		this.props.todoColumnList.forEach( col=> {
+			if(col.id === this.props.columnId) {
+				this.column = col
+			}
 		})
 	}
-	addNewTaskCard () {
-		let cardId = this.props.taskCards.length
-		const taskOptions = {
-			id: cardId,
-			title: this.props.inputText,
-			isEditActive: false
+	onChangeColumTitle(element) {
+		let newTitle = element.target.value
+		this.props.setColumnTitle(newTitle,this.props.columnId)
+	}
+	insertNewColumnTitle() {
+		if(this.column.title === "") {
+			this.column.title = "Todo list"
+			this.props.insertNewColumnTitle(this.props.columnId)
+		} else {
+			this.props.insertNewColumnTitle(this.props.columnId)
+			// this.props.delateToDoColumn(this.props.columnId)
+		}		
+	}
+	addNewToDoCard () {
+		let newId = 0
+		this.props.todoCards.forEach( item => {
+			let itemId = Number(item.cardId)
+			if(itemId >= newId) {
+				newId = itemId+1
+			}			
+		})
+		let cardItem = {
+			colId:this.props.columnId,
+			cardId: newId,
+			isCardActive: false,
+			title:""
 		}
-		this.props.setTaskCard(taskOptions)
+		let lastItem = this.props.todoCards[this.props.todoCards.length - 1]
+		if( lastItem === undefined || lastItem.title !== ""){
+			this.props.setNewTodoCard(cardItem)
+		}
+		
+	}
+	showTodoCardList () {
+		return this.props.todoCards.map((card, index) => {
+			if(card.colId === this.props.columnId) {
+				return  <TodoCardContainer	
+					columnId = {this.props.columnId}
+					key = {index}
+				/>
+			}
+		}	
+		)
 	}
 	render() {
-		return  <Todo 
-					  inputText = {this.props.inputText}
-					  addNewTaskCard = {this.addNewTaskCard.bind(this)}
-					  showCards = {this.showCards.bind(this)}
-					  setNewInputText = {this.setNewInputText.bind(this)}
-					  />
+		return  <Todo  
+		isEditColumnTitle = {this.column.isEditColumnTitle}
+		columnTitle = {this.column.title}
+		onChangeColumTitle = {this.onChangeColumTitle.bind(this)}
+		columnId = {this.column.id}
+		insertNewColumnTitle = {this.insertNewColumnTitle.bind(this)}
+		isColumnActive = {this.column.isColumnActive}
+		addNewToDoCard = {this.addNewToDoCard.bind(this)}
+		showTodoCardList = {this.showTodoCardList.bind(this)}
+		todoCardsCount = {this.props.todoCards.length}
+		/>
 	}
 }
+
+
 const mapStateToProps = (state) => {
 	return {
-		taskCards: state.todoData.taskCardsToDo,
-		inputText: state.todoData.inputText,
-		newTaskTitle: state.todoData.newTaskCardTitle
+		todoColumnList: state.boardData.todoColumnList,
+		todoCards: state.todoData.cards
 	}
 }
 const mapDispatchToProps = {
-	setTaskCard,
-	setChangedInputText,
-	onEditTaskTitle,
-	editTitleText
+	setColumnTitle,
+	insertNewColumnTitle,
+	setNewTodoCard
+	// delateToDoColumn
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer)

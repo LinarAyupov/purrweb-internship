@@ -1,9 +1,15 @@
 import React from "react"
-import TodoContainer from "../Todo/TodoContainer"
 const Board = (props) => {
+	
 	return (
 		<div className="board-wrap">
-			<TodoContainer/>
+			
+			<div className = "todo-list">
+			{props.showTodoColumns()}
+			<button className="board__btn" onClick = {props.addNewTodoColumn}>
+				Add another list
+			</button>
+			</div>
 		</div>
 		)
 }

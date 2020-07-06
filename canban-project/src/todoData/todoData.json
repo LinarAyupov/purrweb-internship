@@ -1,0 +1,22 @@
+{
+    "todoItems":[
+        {
+            "id":"0",
+            "title":"some title",
+            "todoCards": [
+                {
+                    "id":"0",
+                    "title":"some card title",
+                    "description":"some description",
+                    "comments": [
+                        {
+                            "id":"0",
+                            "text":"some comment text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+    

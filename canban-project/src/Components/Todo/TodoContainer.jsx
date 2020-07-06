@@ -39,9 +39,12 @@ class TodoContainer extends React.Component {
 		})
 		let cardItem = {
 			colId:this.props.columnId,
-			cardId: newId,
+			cardId: newId,	
 			isCardActive: false,
-			title:""
+			isShowInfo:false,
+			title:"",
+			haveDescr: false,
+			description:""
 		}
 		let lastItem = this.props.todoCards[this.props.todoCards.length - 1]
 		if( lastItem === undefined || lastItem.title !== ""){
@@ -61,17 +64,22 @@ class TodoContainer extends React.Component {
 		)
 	}
 	render() {
-		return  <Todo  
-		isEditColumnTitle = {this.column.isEditColumnTitle}
-		columnTitle = {this.column.title}
-		onChangeColumTitle = {this.onChangeColumTitle.bind(this)}
-		columnId = {this.column.id}
-		insertNewColumnTitle = {this.insertNewColumnTitle.bind(this)}
-		isColumnActive = {this.column.isColumnActive}
-		addNewToDoCard = {this.addNewToDoCard.bind(this)}
-		showTodoCardList = {this.showTodoCardList.bind(this)}
-		todoCardsCount = {this.props.todoCards.length}
-		/>
+		return  (
+			<>
+				<Todo  
+					isEditColumnTitle = {this.column.isEditColumnTitle}
+					columnTitle = {this.column.title}
+					onChangeColumTitle = {this.onChangeColumTitle.bind(this)}
+					columnId = {this.column.id}
+					insertNewColumnTitle = {this.insertNewColumnTitle.bind(this)}
+					isColumnActive = {this.column.isColumnActive}
+					addNewToDoCard = {this.addNewToDoCard.bind(this)}
+					showTodoCardList = {this.showTodoCardList.bind(this)}
+					todoCardsCount = {this.props.todoCards.length}
+				/>
+				
+			</>
+		)
 	}
 }
 

@@ -1,7 +1,9 @@
 import React from "react"
 import TodoCard from "./TodoCard"
 import { connect } from "react-redux"
-import {setNewCardTitle, insertCardTitle} from "../../Redux/todo-reducer.js"
+import {setNewCardTitle, insertCardTitle,showCardInfo} from "../../Redux/todo-reducer.js"
+import CardInfoContainer from "../Card/CardInfo/CardInfoContainer"
+
 
 
 class TodoCardContainer extends React.Component {
@@ -26,13 +28,33 @@ class TodoCardContainer extends React.Component {
 			this.props.insertCardTitle(this.card.cardId)
 		}	
     }
+    showCardInfo (e) {
+        this.props.showCardInfo(this.card.cardId, this.card.colId)
+    }
+
     render() {
-        return <TodoCard 
-            cardTitle = {this.card.title}
-            isCardActive = {this.card.isCardActive}
-            editCardTitle = {this.editCardTitle.bind(this)}
-            insertCardTitle = {this.insertCardTitle.bind(this)}
-        />
+        return (
+            <>
+            <TodoCard 
+                cardTitle = {this.card.title}
+                isCardActive = {this.card.isCardActive}
+                editCardTitle = {this.editCardTitle.bind(this)}
+                insertCardTitle = {this.insertCardTitle.bind(this)}
+                showCardInfo = {this.showCardInfo.bind(this)}
+            />
+            {
+					this.card.isShowInfo ?
+					<CardInfoContainer 
+                        cardTitle = {this.card.title}
+                        showCardInfo = {this.showCardInfo.bind(this)}
+                        cardId = {this.card.cardId}
+                        colId = {this.card.colId}
+                        cardDescr = {this.card.description}
+                    /> :
+					<div></div>
+				}
+            </>
+        )
     }
 }
 
@@ -44,6 +66,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
     setNewCardTitle,
-    insertCardTitle
+    insertCardTitle,
+    showCardInfo,
 }
 export default connect(mapStateToProps,mapDispatchToProps)(TodoCardContainer)

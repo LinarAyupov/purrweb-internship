@@ -3,7 +3,7 @@ html {
 }
 * {
 	box-sizing: inherit;
-	padding: 0
+  padding: 0
 }
 body {
   margin: 0;
@@ -72,12 +72,13 @@ code {
   padding: 5px 5px 10px;
   outline: none;
 }
-.todo-card + .todo-card {
-  margin-top: 10px;
+.todo-card {
+  margin-bottom: 10px;
 }
 .todo-card__title {
   background-color: #fff;
   padding: 10px;
+  cursor: pointer;
 }
 
 .todo-add__btn {
@@ -89,4 +90,46 @@ code {
   border-radius: 3px;
   color: #fff;
   outline: none;
+}
+.card-info {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+.card-info__wrap {
+  width: 768px;
+  background-color: #f4f5f7;
+  margin: 40px 0 80px;
+  padding: 20px;
+  border-radius: 3px;
+  z-index: 100;
+}
+.card-ifo__dsecr-text {
+  width: 100%;
+  font-size: 18px;
+  padding: 5px;
+}
+.card-info__descr-btn {
+  padding: 5px 20px;
+}
+.test {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 2;
+}
+.card-info__close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+.card-info__title {
+  margin: 0 0 20px ;
 }

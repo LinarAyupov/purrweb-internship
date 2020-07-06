@@ -5,7 +5,11 @@ const TodoCard = (props) => {
 		<div className="todo-card">
 			{
 				props.isCardActive ?
-					<div className ="todo-card__title">{props.cardTitle}</div>
+					<div className ="todo-card__title"
+						onClick = {props.showCardInfo}
+					>
+						{props.cardTitle}
+					</div>
 				:
 					<input type = "text"
 						className = "todo-card__input"

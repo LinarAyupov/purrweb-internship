@@ -30,7 +30,8 @@ class BoardContainer extends React.Component {
 			id:newId,
 			title:"",
 			isColumnActive:false,
-			isEditColumnTitle: true
+			isEditColumnTitle: true,
+			isMenuActive: false
 		}
 		this.props.setTodoColumn(defaultColumnData)	
 	}

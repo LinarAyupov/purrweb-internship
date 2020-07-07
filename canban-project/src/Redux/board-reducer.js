@@ -2,6 +2,7 @@ const SET_TODO_COLUMN = "SET-TODO-COLUMN"
 const SET_COLUMN_TITLE = "SET-COLUMN-TITLE"
 const INSERT_NEW_COLUMN_TITLE = "INSERT-NEW-COLUMN-TITLE"
 // const  DELATE_TODO_COLUMN = "DELATE-TODO-COLUMN"
+const OPEN_LIST_MENU = "OPEN-LIST-MENU"
 
 
 let initialState = {
@@ -9,8 +10,9 @@ let initialState = {
         {
 			id:0,
 			title:"ToDo",
-			isColumnActive:true,
-			isEditColumnTitle: false
+			isColumnActive: true,
+            isEditColumnTitle: false,
+            isMenuActive: false
 		}
     ]
 }
@@ -49,6 +51,16 @@ const boardSection = (state = initialState, action) => {
         //         ...state,
         //         todoColumnList: state.todoColumnList.filter( item => item.id!==action.columnId  )
         //     }
+        case "OPEN-LIST-MENU": 
+            return {
+                ...state,
+                ...state.todoColumnList.forEach(col => {
+                    if(col.id === action.columnId) {
+                        col.isMenuActive ? col.isMenuActive = false : col.isMenuActive = true
+                    }
+                }),
+                todoColumnList:[...state.todoColumnList]
+            }
 		default:
 			return state;
 	}
@@ -79,5 +91,12 @@ export const insertNewColumnTitle = (columnId) => {
 //         columnId
 //     }
 // }
+
+export const openListMenu = (columnId) => {
+    return {
+        type: OPEN_LIST_MENU,
+        columnId
+    }
+}
 
 export default boardSection

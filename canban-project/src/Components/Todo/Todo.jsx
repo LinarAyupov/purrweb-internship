@@ -45,7 +45,30 @@ const Todo = (props) => {
 						}
 						}
 					/>:
-					<h1 className = "todo-title">{props.columnTitle}</h1>
+					<header className="todo__header">
+						<h1 className = "todo-title">{props.columnTitle}</h1>
+						<div className="todo-menu" onClick={props.openMenu}>
+							<div className="todo-menu__icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+
+						</div>
+						{
+							props.isMenuActive ?
+								<div className="todo-menu__list">
+								<h3 className="todo-menu__list-title">List actions 
+									<span className="todo-menu__close" onClick={props.openMenu}>&times;</span>
+								</h3>
+								<button className="todo-menu__list-btn">Edit list title...</button>
+								<button className="todo-menu__list-btn">Delate list...</button>
+								</div>
+							:
+								<div></div>
+						}
+					</header>
+					
 				}
 				<div>
 					{

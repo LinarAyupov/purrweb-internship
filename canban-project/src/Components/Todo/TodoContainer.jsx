@@ -1,7 +1,7 @@
 import React from "react"
 import Todo from "./Todo"
 import { connect } from "react-redux"
-import {setColumnTitle,insertNewColumnTitle} from "../../Redux/board-reducer.js"
+import {setColumnTitle,insertNewColumnTitle,openListMenu} from "../../Redux/board-reducer.js"
 import {setNewTodoCard} from "../../Redux/todo-reducer.js"
 import TodoCardContainer from "../Card/TodoCardContainer"
 
@@ -63,6 +63,9 @@ class TodoContainer extends React.Component {
 		}	
 		)
 	}
+	openMenu() {
+		this.props.openListMenu(this.column.id)
+	}
 	render() {
 		return  (
 			<>
@@ -77,6 +80,8 @@ class TodoContainer extends React.Component {
 					showTodoCardList = {this.showTodoCardList.bind(this)}
 					todoCardsCount = {this.props.todoCards.length}
 					isCardActive = {this.props.todoCards[this.props.todoCards.length-1].isCardActive}
+					openMenu = {this.openMenu.bind(this)}
+					isMenuActive = {this.column.isMenuActive}
 				/>
 				
 			</>
@@ -94,7 +99,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
 	setColumnTitle,
 	insertNewColumnTitle,
-	setNewTodoCard
+	setNewTodoCard,
+	openListMenu
 	// delateToDoColumn
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer)

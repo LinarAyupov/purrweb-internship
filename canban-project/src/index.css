@@ -53,12 +53,67 @@ code {
   vertical-align: top;
   z-index: 1;
 }
-
+.todo__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
 .todo-title {
   margin:  0 0 10px 0;
   line-height: 18px;
   font-size: 20px;
   padding: 5px 5px 8px;
+}
+.todo-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.todo-menu__icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 24px;
+  height: 15px;
+  cursor: pointer;
+}
+.todo-menu__icon > span {
+  width: 5px;
+  height: 5px;
+  background-color: #000;
+  border-radius: 50%;
+}
+.todo-menu__list {
+  position: absolute;
+  right: -244px;
+  top: -1px;
+  background-color: #fff;
+  width: 244px;
+  padding: 15px;
+  border-radius: 3px;
+  z-index: 500;
+}
+.todo-menu__list-title {
+  margin: 0;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.todo-menu__close {
+  float: right;
+  cursor: pointer;
+}
+.todo-menu__list-btn {
+  width: 100%;
+  margin-bottom: 5px;
+  text-align: left;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 .todo-title__input,
 .todo-title,

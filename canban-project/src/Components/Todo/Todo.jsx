@@ -35,7 +35,7 @@ const Todo = (props) => {
 						onChange = {props.onChangeColumTitle} 
 						defaultValue ={props.columnTitle}
 						placeholder = "Enter list title..."
-						onBlur = {()=>setTimeout(props.insertNewColumnTitle,300)}
+						onBlur = {props.insertNewColumnTitle}
 						autoFocus={true}
 						onKeyPress ={
 							(e) => {
@@ -61,8 +61,8 @@ const Todo = (props) => {
 								<h3 className="todo-menu__list-title">List actions 
 									<span className="todo-menu__close" onClick={props.openMenu}>&times;</span>
 								</h3>
-								<button className="todo-menu__list-btn">Edit list title...</button>
-								<button className="todo-menu__list-btn">Delate list...</button>
+								<button className="todo-menu__list-btn" onClick ={props.insertNewColumnTitle}>Edit list title...</button>
+								<button className="todo-menu__list-btn" onClick = {props.delateTodoList}>Delate list...</button>
 								</div>
 							:
 								<div></div>

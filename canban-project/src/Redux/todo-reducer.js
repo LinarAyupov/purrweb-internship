@@ -51,6 +51,9 @@ const todoColumn = (state = initialState, action) => {
 				...state,
 				...state.cards.forEach(card => {
                     if(card.cardId === action.cardId) {
+						if(card.title === "") {
+							card.title = "Some card title"
+						}
                         card.isCardActive = true
                     }
 				}),

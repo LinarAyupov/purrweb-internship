@@ -1,14 +1,15 @@
 const SET_TODO_COLUMN = "SET-TODO-COLUMN"
 const SET_COLUMN_TITLE = "SET-COLUMN-TITLE"
 const INSERT_NEW_COLUMN_TITLE = "INSERT-NEW-COLUMN-TITLE"
-// const  DELATE_TODO_COLUMN = "DELATE-TODO-COLUMN"
+const  DELATE_TODO_COLUMN = "DELATE-TODO-COLUMN"
 const OPEN_LIST_MENU = "OPEN-LIST-MENU"
 
 
 let initialState = {
 	todoColumnList:[
         {
-			id:0,
+            id:0,
+            key:0,
 			title:"ToDo",
 			isColumnActive: true,
             isEditColumnTitle: false,
@@ -40,17 +41,17 @@ const boardSection = (state = initialState, action) => {
                 ...state,
                 ...state.todoColumnList.forEach(col => {
                     if(col.id === action.columnId) {
-                        col.isEditColumnTitle = false
+                        col.isEditColumnTitle?col.isEditColumnTitle = false : col.isEditColumnTitle = true
                         col.isColumnActive = true
                     }
                 }),
                 todoColumnList:[...state.todoColumnList]
             }
-        // case "DELATE-TODO-COLUMN":
-        //     return {
-        //         ...state,
-        //         todoColumnList: state.todoColumnList.filter( item => item.id!==action.columnId  )
-        //     }
+        case "DELATE-TODO-COLUMN":
+            return {
+                ...state,
+                todoColumnList:[...state.todoColumnList.filter( item => item.id!==action.columnId)]
+            }
         case "OPEN-LIST-MENU": 
             return {
                 ...state,
@@ -85,12 +86,12 @@ export const insertNewColumnTitle = (columnId) => {
         columnId
     }
 }
-// export const delateToDoColumn = (columnId) => {
-//     return {
-//         type: DELATE_TODO_COLUMN,
-//         columnId
-//     }
-// }
+export const delateToDoColumn = (columnId) => {
+    return {
+        type: DELATE_TODO_COLUMN,
+        columnId
+    }
+}
 
 export const openListMenu = (columnId) => {
     return {

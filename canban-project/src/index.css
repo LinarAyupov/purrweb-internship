@@ -21,9 +21,7 @@ code {
 .board-wrap {
   height: 100vh;
   width: 100%;
-  position: relative;
   background-color: #ccc;
-  padding: 30px 10px;
   background-image: url('../src/Assets/canban-bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,7 +40,6 @@ code {
 }
 
 .todo-wrapper {
-  position: relative;
   display: inline-block;
   flex-direction: column;
   width: 270px;
@@ -58,17 +55,20 @@ code {
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
+  position: relative;
+
 }
 .todo-title {
   margin:  0 0 10px 0;
   line-height: 18px;
   font-size: 20px;
   padding: 5px 5px 8px;
+  
 }
 .todo-menu {
-  position: relative;
   display: flex;
   align-items: center;
+
 }
 .todo-menu__icon {
   display: flex;
@@ -86,8 +86,8 @@ code {
 }
 .todo-menu__list {
   position: absolute;
-  right: -244px;
-  top: -1px;
+  right: -249px;
+  top: -5px;
   background-color: #fff;
   width: 244px;
   padding: 15px;
@@ -128,6 +128,9 @@ code {
   padding: 5px 5px 10px;
   outline: none;
 }
+.todo-title__input {
+  margin-bottom: 10px;
+}
 .todo-card {
   margin-bottom: 10px;
 }
@@ -148,15 +151,22 @@ code {
   outline: none;
 }
 .card-info {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
  
+}
+.todo-list {
+  width: 100%;
+  height: 100%;
+}
+#card-info__modal {
+  position: absolute;
+  top: 0;
+  z-index: 10000;
+  width: 100%;
 }
 .card-info__wrap {
   width: 768px;
@@ -164,7 +174,7 @@ code {
   margin: 40px 0 80px;
   padding: 20px;
   border-radius: 3px;
-  z-index: 100;
+  z-index: 1000;
 }
 .card-ifo__dsecr-text {
   width: 100%;
@@ -176,10 +186,15 @@ code {
 }
 .test {
   position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
   background-color: rgba(0, 0, 0, .4);
-  z-index: 10;
 }
 .card-info__close {
   float: right;

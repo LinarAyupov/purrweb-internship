@@ -10,9 +10,9 @@ class BoardContainer extends React.Component {
 	showTodoColumns(){
 		if (this.props.todoColumnList.length!== 0) {
 			return this.props.todoColumnList.map (
-				(column, key)=> <TodoContainer
+				(column)=> <TodoContainer
 					columnId = {column.id}
-					key = {key}
+					key = {column.key}
 				/>
 			)
 		}
@@ -26,8 +26,10 @@ class BoardContainer extends React.Component {
 			}
 			
 		})
+		let newKey = Math.floor(Math.random()*1000)
 		let defaultColumnData = {
 			id:newId,
+			key:newKey,
 			title:"",
 			isColumnActive:false,
 			isEditColumnTitle: true,

@@ -1,4 +1,5 @@
 import React from "react"
+import ReactDOM from "react-dom"
 import TodoCard from "./TodoCard"
 import { connect } from "react-redux"
 import {setNewCardTitle, insertCardTitle,showCardInfo,setCardComments,setCardCommentText} from "../../Redux/todo-reducer.js"
@@ -23,11 +24,7 @@ class TodoCardContainer extends React.Component {
         this.props.setNewCardTitle(cardId,newTitle)
     }
     insertCardTitle () {
-        if(this.card.title === "") {
-			return null
-		} else {
-			this.props.insertCardTitle(this.card.cardId)
-		}	
+		this.props.insertCardTitle(this.card.cardId)
     }
     showCardInfo (e) {
         this.props.showCardInfo(this.card.cardId, this.card.colId)
@@ -35,9 +32,9 @@ class TodoCardContainer extends React.Component {
     addCardComment() {
         let newComId =  0
         this.card.comments.forEach( comment => {
-			let commtId = Number(comment.comId)
-			if(commtId >= newComId) {
-				newComId = commtId+1
+			let commId = Number(comment.comId)
+			if(commId >= newComId) {
+				newComId = commId+1
 			}			
 		})
         const colId = this.card.colId
@@ -81,7 +78,7 @@ class TodoCardContainer extends React.Component {
             />
             {
 					this.card.isShowInfo ?
-					<CardInfoContainer 
+					ReactDOM.createPortal(<CardInfoContainer 
                         cardTitle = {this.card.title}
                         showCardInfo = {this.showCardInfo.bind(this)}
                         cardId = {this.card.cardId}
@@ -90,7 +87,8 @@ class TodoCardContainer extends React.Component {
                         addCardComment = {this.addCardComment.bind(this)}
                         showCardComments = {this.showCardComments.bind(this)}
                         isCommentAdded = {this.card.comments[this.card.comments.length-1].isCommentActive}
-                    /> :
+                    />,
+                   document.getElementById('card-info__modal') ) :
 					<div></div>
 				}
             </>

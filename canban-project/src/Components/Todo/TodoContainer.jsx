@@ -1,9 +1,10 @@
 import React from "react"
 import Todo from "./Todo"
 import { connect } from "react-redux"
-import {setColumnTitle,insertNewColumnTitle,openListMenu} from "../../Redux/board-reducer.js"
+import {setColumnTitle,insertNewColumnTitle,openListMenu,delateToDoColumn} from "../../Redux/board-reducer.js"
 import {setNewTodoCard} from "../../Redux/todo-reducer.js"
 import TodoCardContainer from "../Card/TodoCardContainer"
+import { compose } from "redux"
 
 
 class TodoContainer extends React.Component {
@@ -15,6 +16,7 @@ class TodoContainer extends React.Component {
 				this.column = col
 			}
 		})
+		
 	}
 	onChangeColumTitle(element) {
 		let newTitle = element.target.value
@@ -26,7 +28,6 @@ class TodoContainer extends React.Component {
 			this.props.insertNewColumnTitle(this.props.columnId)
 		} else {
 			this.props.insertNewColumnTitle(this.props.columnId)
-			// this.props.delateToDoColumn(this.props.columnId)
 		}		
 	}
 	addNewToDoCard () {
@@ -51,6 +52,9 @@ class TodoContainer extends React.Component {
 				text:'some comment',}]
 		}
 			this.props.setNewTodoCard(cardItem)		
+	}
+	delateTodoList() {
+		this.props.delateToDoColumn(this.props.columnId)
 	}
 	showTodoCardList () {
 		return this.props.todoCards.map((card, index) => {
@@ -82,6 +86,7 @@ class TodoContainer extends React.Component {
 					isCardActive = {this.props.todoCards[this.props.todoCards.length-1].isCardActive}
 					openMenu = {this.openMenu.bind(this)}
 					isMenuActive = {this.column.isMenuActive}
+					delateTodoList = {this.delateTodoList.bind(this)}
 				/>
 				
 			</>
@@ -100,7 +105,7 @@ const mapDispatchToProps = {
 	setColumnTitle,
 	insertNewColumnTitle,
 	setNewTodoCard,
-	openListMenu
-	// delateToDoColumn
+	openListMenu,
+	delateToDoColumn
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer)

@@ -7,7 +7,17 @@ const SET_CARD_DESCR = "SET-CARD-DESCR"
 
 
 let initialState = {
-	cards:[]
+	cards:[
+		{
+			colId:0,
+			cardId: 0,	
+			isCardActive: false,
+			isShowInfo:false,
+			title:"",
+			haveDescr: false,
+			description:""
+		}
+	]
 }
 
 

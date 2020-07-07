@@ -2,6 +2,30 @@ import React from "react"
 
 
 const Todo = (props) => {
+	let showAddBtn = () => {
+		if(props.isColumnActive) {
+			if(props.isCardActive) {
+				return <button 
+					className = "todo-add__btn" 
+					onClick = {props.addNewToDoCard}>
+						Add another card
+				</button>
+			} else {
+				return <button 
+				className = "todo-add__btn" 
+				>
+					Add another card
+					</button>
+			}
+
+		} else {
+			return <button 
+			className = "todo-add__btn" 
+			onClick = {props.insertNewColumnTitle}>
+				Add another list
+			</button>
+		}
+	}
 	return (
 			<div className="todo-wrapper">
 				{
@@ -11,9 +35,7 @@ const Todo = (props) => {
 						onChange = {props.onChangeColumTitle} 
 						defaultValue ={props.columnTitle}
 						placeholder = "Enter list title..."
-						onBlur = {
-							()=> setTimeout(props.insertNewColumnTitle,100)
-						}
+						onBlur = {()=>setTimeout(props.insertNewColumnTitle,300)}
 						autoFocus={true}
 						onKeyPress ={
 							(e) => {
@@ -32,18 +54,7 @@ const Todo = (props) => {
 						props.showTodoCardList()}
 				</div>
 				{
-				props.isColumnActive?
-					<button 
-					className = "todo-add__btn" 
-					onClick = {props.addNewToDoCard}>
-						Add another card
-					</button>
-				:	
-					<button 
-					className = "todo-add__btn" 
-					onClick = {props.insertNewColumnTitle}>
-						Add another list
-					</button>
+					showAddBtn()
 				}
 			</div>
 		)

@@ -15,7 +15,7 @@ const TodoCard = (props) => {
 						className = "todo-card__input"
 						defaultValue = {props.cardTitle}
 						onChange = {props.editCardTitle}
-						onBlur = {props.insertCardTitle}
+						onBlur = {()=>setTimeout(props.insertCardTitle,200)}
 						placeholder = "Enter a title for this card..."
 						autoFocus = {true}
 						onKeyPress= {

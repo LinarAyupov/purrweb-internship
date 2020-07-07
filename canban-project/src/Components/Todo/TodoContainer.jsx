@@ -46,11 +46,7 @@ class TodoContainer extends React.Component {
 			haveDescr: false,
 			description:""
 		}
-		let lastItem = this.props.todoCards[this.props.todoCards.length - 1]
-		if( lastItem === undefined || lastItem.title !== ""){
-			this.props.setNewTodoCard(cardItem)
-		}
-		
+			this.props.setNewTodoCard(cardItem)		
 	}
 	showTodoCardList () {
 		return this.props.todoCards.map((card, index) => {
@@ -76,6 +72,7 @@ class TodoContainer extends React.Component {
 					addNewToDoCard = {this.addNewToDoCard.bind(this)}
 					showTodoCardList = {this.showTodoCardList.bind(this)}
 					todoCardsCount = {this.props.todoCards.length}
+					isCardActive = {this.props.todoCards[this.props.todoCards.length-1].isCardActive}
 				/>
 				
 			</>

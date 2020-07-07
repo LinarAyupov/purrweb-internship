@@ -1,8 +1,9 @@
 import React from "react"
 import TodoCard from "./TodoCard"
 import { connect } from "react-redux"
-import {setNewCardTitle, insertCardTitle,showCardInfo} from "../../Redux/todo-reducer.js"
+import {setNewCardTitle, insertCardTitle,showCardInfo,setCardComments,setCardCommentText} from "../../Redux/todo-reducer.js"
 import CardInfoContainer from "../Card/CardInfo/CardInfoContainer"
+import CardComment from "./CardInfo/CardComment"
 
 
 
@@ -31,6 +32,42 @@ class TodoCardContainer extends React.Component {
     showCardInfo (e) {
         this.props.showCardInfo(this.card.cardId, this.card.colId)
     }
+    addCardComment() {
+        let newComId =  0
+        this.card.comments.forEach( comment => {
+			let commtId = Number(comment.comId)
+			if(commtId >= newComId) {
+				newComId = commtId+1
+			}			
+		})
+        const colId = this.card.colId
+        const cardId = this.card.cardId
+        const commentItem = {
+            comId:newComId,
+            isCommentActive:false,
+            text:'some comment',
+        }
+        this.props.setCardComments(colId,cardId,commentItem)
+    }
+    addCommentText(comText,comId) {
+        let commentText = comText
+        const colId = this.card.colId
+        const cardId = this.card.cardId
+        const commentId = comId
+
+        this.props.setCardCommentText(colId,cardId,commentId,commentText)
+    }
+    showCardComments() {
+        return this.card.comments.map((comment, index) => {
+            return <CardComment
+                        commentText = {comment.text}
+                        isCommentActive = {comment.isCommentActive}
+                        commentId = {comment.comId}
+                        addCommentText = {this.addCommentText.bind(this)}
+                        key = {index}
+                />
+        })
+    }
 
     render() {
         return (
@@ -50,6 +87,9 @@ class TodoCardContainer extends React.Component {
                         cardId = {this.card.cardId}
                         colId = {this.card.colId}
                         cardDescr = {this.card.description}
+                        addCardComment = {this.addCardComment.bind(this)}
+                        showCardComments = {this.showCardComments.bind(this)}
+                        isCommentAdded = {this.card.comments[this.card.comments.length-1].isCommentActive}
                     /> :
 					<div></div>
 				}
@@ -68,5 +108,7 @@ const mapDispatchToProps = {
     setNewCardTitle,
     insertCardTitle,
     showCardInfo,
+    setCardComments,
+    setCardCommentText
 }
 export default connect(mapStateToProps,mapDispatchToProps)(TodoCardContainer)

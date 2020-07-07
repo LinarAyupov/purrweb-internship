@@ -4,6 +4,8 @@ const SET_NEW_CARD_TITLE = "SET-NEW-CARD-TITLE"
 const INSERT_CARD_TITLE = "INSERT-CARD-TITLE" 
 const SHOW_CARD_INFO = "SHOW-CARD-INFO"
 const SET_CARD_DESCR = "SET-CARD-DESCR"
+const SET_CARD_COMMENT = "SET-CARD-COMMENT"
+const SET_CARD_COMMENT_TEXT = "SET-CARD-COMMENT-TEXT"
 
 
 let initialState = {
@@ -15,7 +17,13 @@ let initialState = {
 			isShowInfo:false,
 			title:"",
 			haveDescr: false,
-			description:""
+			description:"",
+			comments:[
+				{
+					comId:0,
+					isCommentActive:false,
+					text:'some comment',}
+			]
 		}
 	]
 }
@@ -71,6 +79,31 @@ const todoColumn = (state = initialState, action) => {
 
 				cards:[...state.cards]
 			}
+		case "SET-CARD-COMMENT":
+			return {
+				...state,
+				...state.cards.forEach( card => {
+					if(card.colId === action.colId && card.cardId === action.cardId) {
+						card.comments.push(action.commentItem)
+					}
+				}),
+				cards:[...state.cards]
+			}
+		case "SET-CARD-COMMENT-TEXT":
+			return {
+				...state,
+				...state.cards.forEach( card => {
+					if(card.colId === action.colId && card.cardId === action.cardId) {
+						card.comments.forEach(comment => {
+							if( comment.comId === action.commentId) {
+								comment.text = action.commentText
+								comment.isCommentActive = true
+							}
+						})
+					}
+				}),
+				cards:[...state.cards]
+			}
 		default:
 			return state;
 	}
@@ -111,7 +144,23 @@ export const setCardDescr = (descrText, cardId, colId ) => {
 	}
 }
 
+export const setCardComments = (colId, cardId, commentItem) => {
+	return {
+		type: SET_CARD_COMMENT,
+		colId,
+		cardId,
+		commentItem
+	}
+}
 
-
+export const setCardCommentText = (colId,cardId,commentId,commentText) => {
+	return {
+		type: SET_CARD_COMMENT_TEXT,
+		colId,
+		cardId,
+		commentId,
+		commentText
+	}
+}
 
 export default todoColumn

@@ -44,7 +44,11 @@ class TodoContainer extends React.Component {
 			isShowInfo:false,
 			title:"",
 			haveDescr: false,
-			description:""
+			description:"",
+			comments:[{
+				comId:0,
+				isCommentActive:false,
+				text:'some comment',}]
 		}
 			this.props.setNewTodoCard(cardItem)		
 	}

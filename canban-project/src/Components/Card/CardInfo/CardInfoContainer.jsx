@@ -20,6 +20,9 @@ class CardInfoContainer extends React.Component {
                 descrInputRef = {this.descrInputRef}
                 addNewDescription = {this.addNewDescription.bind(this)}
                 cardDescr = {this.props.cardDescr}
+                addCardComment = {this.props.addCardComment}
+                showCardComments = {this.props.showCardComments}
+                isCommentAdded = {this.props.isCommentAdded}
             />
     }
 }

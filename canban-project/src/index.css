@@ -51,6 +51,7 @@ code {
   padding: 5px;
   margin: 5px;
   vertical-align: top;
+  z-index: 1;
 }
 
 .todo-title {
@@ -81,7 +82,7 @@ code {
   cursor: pointer;
 }
 
-.todo-add__btn {
+.add-btn {
   width: 130px;
   padding: 5px;
   margin-top: 10px;
@@ -123,7 +124,7 @@ code {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, .4);
-  z-index: 2;
+  z-index: 10;
 }
 .card-info__close {
   float: right;
@@ -132,4 +133,29 @@ code {
 }
 .card-info__title {
   margin: 0 0 20px ;
+}
+.card-info__comments {
+  display: flex;
+  flex-direction: column;
+}
+.card-info__comments-container {
+  margin-bottom: 20px;
+}
+.card-info__comments-title {
+  margin-bottom: 0;
+}
+.card-info__comment-wrap {
+    padding:3px 10px;
+    margin-top: 5px;
+    display: flex;
+}
+.card-info__comment-text {
+  background-color: #fff;
+  padding: 5px 10px;
+  box-shadow: 0 1px 2px -1px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+  border-radius: 3px;
+}
+.card-info__comment-input {
+  padding: 5px 10px;
+  border-radius: 3px;
 }

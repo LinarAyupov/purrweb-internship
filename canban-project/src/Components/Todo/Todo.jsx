@@ -6,13 +6,13 @@ const Todo = (props) => {
 		if(props.isColumnActive) {
 			if(props.isCardActive) {
 				return <button 
-					className = "todo-add__btn" 
+					className = "add-btn" 
 					onClick = {props.addNewToDoCard}>
 						Add another card
 				</button>
 			} else {
 				return <button 
-				className = "todo-add__btn" 
+				className = "add-btn" 
 				>
 					Add another card
 					</button>
@@ -20,7 +20,7 @@ const Todo = (props) => {
 
 		} else {
 			return <button 
-			className = "todo-add__btn" 
+			className = "add-btn" 
 			onClick = {props.insertNewColumnTitle}>
 				Add another list
 			</button>

@@ -20,17 +20,23 @@ const CardInfo = (props) => {
                     name="description"
                     rows = "3"
                     className ="card-ifo__dsecr-text"></textarea>
-                    <button className ="card-info__descr-btn"
+                    <button className ="add-btn"
                             onClick = {props.addNewDescription}
                     >
                         Add description
                     </button>
                 </div>
                 <div className="card-info__comments">
-                    <h3 className="card-info__comments-title">
-                        Comments:
-                    </h3>
-                    <div className="card-info__comments-items"></div>
+                    <div className="card-info__comments-container">
+                        <h3 className ="card-info__comments-title">Comments:</h3>
+                        {props.showCardComments()}
+                    </div>
+                    <div className="card-info__comments-items">
+                        {props.isCommentAdded ?
+                            <button className ="add-btn" onClick = {props.addCardComment}>Add comment</button>
+                        :
+                        <button className ="add-btn">Add comment</button>}
+                    </div>
                 </div>
             </div>
         </div>

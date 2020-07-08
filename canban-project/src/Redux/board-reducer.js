@@ -1,7 +1,7 @@
 const SET_TODO_COLUMN = "SET-TODO-COLUMN"
 const SET_COLUMN_TITLE = "SET-COLUMN-TITLE"
 const INSERT_NEW_COLUMN_TITLE = "INSERT-NEW-COLUMN-TITLE"
-const  DELATE_TODO_COLUMN = "DELATE-TODO-COLUMN"
+const  DELETE_TODO_COLUMN = "DELETE-TODO-COLUMN"
 const OPEN_LIST_MENU = "OPEN-LIST-MENU"
 
 
@@ -47,7 +47,7 @@ const boardSection = (state = initialState, action) => {
                 }),
                 todoColumnList:[...state.todoColumnList]
             }
-        case "DELATE-TODO-COLUMN":
+        case "DELETE-TODO-COLUMN":
             return {
                 ...state,
                 todoColumnList:[...state.todoColumnList.filter( item => item.id!==action.columnId)]
@@ -86,9 +86,9 @@ export const insertNewColumnTitle = (columnId) => {
         columnId
     }
 }
-export const delateToDoColumn = (columnId) => {
+export const deleteToDoColumn = (columnId) => {
     return {
-        type: DELATE_TODO_COLUMN,
+        type: DELETE_TODO_COLUMN,
         columnId
     }
 }

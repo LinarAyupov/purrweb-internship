@@ -26,7 +26,7 @@ class BoardContainer extends React.Component {
 			}
 			
 		})
-		let newKey = Math.floor(Math.random()*1000)
+		const newKey = Math.floor(Math.random()*1000)
 		let defaultColumnData = {
 			id:newId,
 			key:newKey,

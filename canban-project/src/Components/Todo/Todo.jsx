@@ -62,7 +62,7 @@ const Todo = (props) => {
 									<span className="todo-menu__close" onClick={props.openMenu}>&times;</span>
 								</h3>
 								<button className="todo-menu__list-btn" onClick ={props.insertNewColumnTitle}>Edit list title...</button>
-								<button className="todo-menu__list-btn" onClick = {props.delateTodoList}>Delate list...</button>
+								<button className="todo-menu__list-btn" onClick = {props.deleteTodoList}>Delate list...</button>
 								</div>
 							:
 								<div></div>

@@ -128,27 +128,69 @@ code {
   padding: 5px 5px 10px;
   outline: none;
 }
+
 .todo-title__input {
   margin-bottom: 10px;
+}
+.todo-card__title,
+.todo-card__input {
+  font-size: 18px;
+  word-wrap: break-word;
 }
 .todo-card {
   margin-bottom: 10px;
 }
+.todo-card__icon {
+  width: 15px;
+  height: 15px;
+  background-image: url(../src/Assets/descr-icon.svg);
+}
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  background-image: url(../src/Assets/edit-icon.svg);
+}
+.edit-icon.info {
+  position: absolute;
+  right: 30px;
+  top: 5px;
+
+}
+
+.todo-card__icon,
+.edit-icon {
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 3px;
+}
+
 .todo-card__title {
   background-color: #fff;
   padding: 10px;
   cursor: pointer;
 }
 
-.add-btn {
+.add-btn,
+.delete-btn {
   width: 130px;
   padding: 5px;
   margin-top: 10px;
-  background-color: #5aac44;
   border: none;
   border-radius: 3px;
   color: #fff;
   outline: none;
+  cursor: pointer;
+}
+.add-btn {
+  background-color: #5aac44;
+}
+.delete-btn {
+  background-color: tomato;
+  float: right;
 }
 .card-info {
   width: 100%;
@@ -176,10 +218,37 @@ code {
   border-radius: 3px;
   z-index: 1000;
 }
-.card-ifo__dsecr-text {
+.card-info__title {
+  display: flex;
+  font-size: 25px;
+  align-items: center;
+  font-weight: bold;
+  padding-right: 50px;
+  position: relative;
+}
+.card-info__title > h3 {
+  margin: 0;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+.card-info__input-text {
   width: 100%;
   font-size: 18px;
   padding: 5px;
+}
+.card-info__descr {
+  padding-bottom: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  position: relative;
+}
+.edit-icon.descr {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+}
+.card-info__descr-text {
+  padding-left: 10px;
 }
 .card-info__descr-btn {
   padding: 5px 20px;

@@ -4,8 +4,11 @@ const SET_NEW_CARD_TITLE = "SET-NEW-CARD-TITLE"
 const INSERT_CARD_TITLE = "INSERT-CARD-TITLE" 
 const SHOW_CARD_INFO = "SHOW-CARD-INFO"
 const SET_CARD_DESCR = "SET-CARD-DESCR"
+const EDIT_CARD_DESCR = "EDIT-CARD-DESCR"
 const SET_CARD_COMMENT = "SET-CARD-COMMENT"
 const SET_CARD_COMMENT_TEXT = "SET-CARD-COMMENT-TEXT"
+const DELETE_CARD = "DELETE-CARD"
+
 
 
 let initialState = {
@@ -13,6 +16,7 @@ let initialState = {
 		{
 			colId:0,
 			cardId: 0,	
+			key:0,
 			isCardActive: false,
 			isShowInfo:false,
 			title:"",
@@ -36,6 +40,13 @@ const todoColumn = (state = initialState, action) => {
 				...state,
 				cards:[...state.cards, action.cardItem]
 			}
+		case "DELETE-CARD":
+			return {
+				...state,
+                cards:[...state.cards.filter( card => {
+					if (card.cardId!==action.cardId) return card
+				})]
+			}
 		case "SET-NEW-CARD-TITLE": 
 			return {
 				...state,
@@ -54,7 +65,7 @@ const todoColumn = (state = initialState, action) => {
 						if(card.title === "") {
 							card.title = "Some card title"
 						}
-                        card.isCardActive = true
+                        card.isCardActive? card.isCardActive=false: card.isCardActive=true
                     }
 				}),
 				cards:[...state.cards]
@@ -82,6 +93,18 @@ const todoColumn = (state = initialState, action) => {
 
 				cards:[...state.cards]
 			}
+		case "EDIT-CARD-DESCR":
+			return {
+				...state,
+				...state.cards.forEach(card => {
+                    if(card.cardId === action.cardId && card.colId === action.colId) {
+                        if(action.descrText !== "") {
+							card.haveDescr = false
+						}
+				}}),
+
+				cards:[...state.cards]
+			} 
 		case "SET-CARD-COMMENT":
 			return {
 				...state,
@@ -164,6 +187,20 @@ export const setCardCommentText = (colId,cardId,commentId,commentText) => {
 		commentId,
 		commentText
 	}
+}
+export const editCardDescr = (cardId,colId) => {
+	return {
+		type: EDIT_CARD_DESCR,
+		cardId,
+		colId
+	}
+}
+export const deleteCard = (cardId) => {
+	return {	
+		type: DELETE_CARD,
+		cardId
+	}
+	
 }
 
 export default todoColumn

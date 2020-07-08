@@ -1,17 +1,23 @@
 import React from "react"
 
 const TodoCard = (props) => {
-	return (
-		<div className="todo-card">
-			{
-				props.isCardActive ?
-					<div className ="todo-card__title"
+	const rendCard = () => {
+		if(props.isCardActive) {
+			return <div className ="todo-card__title"
 						onClick = {props.showCardInfo}
 					>
 						{props.cardTitle}
+					<div className="todo-card__icon-wrap">
+						{props.haveDescr ?
+						<span className="todo-card__icon"></span>
+						:
+						<></>}
 					</div>
-				:
-					<input type = "text"
+				</div>
+		} else {
+
+			if(props.isShowInfo!==true) {
+				return <input type = "text"
 						className = "todo-card__input"
 						defaultValue = {props.cardTitle}
 						onChange = {props.editCardTitle}
@@ -26,7 +32,24 @@ const TodoCard = (props) => {
 							}
 						}
 					/>
+			} else {
+				return <div className ="todo-card__title"
+						onClick = {props.showCardInfo}
+					>
+						{props.cardTitle}
+					<div className="todo-card__icon-wrap">
+						{props.haveDescr ?
+						<span className="todo-card__icon"></span>
+						:
+						<></>}
+					</div>
+				</div>
 			}
+		}
+	}
+	return (
+		<div className="todo-card">
+			{rendCard()}
 		</div>
 		)
 }

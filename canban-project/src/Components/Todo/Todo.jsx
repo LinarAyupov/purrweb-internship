@@ -71,10 +71,7 @@ const Todo = (props) => {
 					
 				}
 				<div>
-					{
-						props.todoCardsCount === 0 && !props.isEditColumnTitle?
-						props.addNewToDoCard():
-						props.showTodoCardList()}
+					{props.showTodoCardList()}
 				</div>
 				{
 					showAddBtn()

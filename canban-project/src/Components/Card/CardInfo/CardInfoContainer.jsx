@@ -1,7 +1,7 @@
 import React from "react"
 import CardInfo from "./CardInfo"
 import { connect } from "react-redux"
-import {setCardDescr,editCardDescr} from "../../../Redux/todo-reducer"
+import {setCardDescr,editCardDescr,deleteCardDescr} from "../../../Redux/todo-reducer"
 
 
 class CardInfoContainer extends React.Component {
@@ -15,6 +15,9 @@ class CardInfoContainer extends React.Component {
     }
     editCardDescription() {
         this.props.editCardDescr(this.props.cardId,this.props.colId)
+    }
+    deleteDescription() {
+        this.props.deleteCardDescr(this.props.cardId,this.props.colId)
     }
     render() {
         return <CardInfo
@@ -32,6 +35,7 @@ class CardInfoContainer extends React.Component {
                 editCardTitle = {this.props.editCardTitle}
                 isCardActive = {this.props.isCardActive}
                 deleteCard = {this.props.deleteCard}
+                deleteDescription = {this.deleteDescription.bind(this)}
             />
     }
 }
@@ -47,7 +51,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = {
     setCardDescr,
-    editCardDescr
+    editCardDescr,
+    deleteCardDescr
 }
 
 

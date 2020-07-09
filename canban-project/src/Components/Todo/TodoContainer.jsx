@@ -1,8 +1,11 @@
 import React from "react"
 import Todo from "./Todo"
 import { connect } from "react-redux"
-import {setColumnTitle,insertNewColumnTitle,openListMenu,deleteToDoColumn} from "../../Redux/board-reducer.js"
-import {setNewTodoCard} from "../../Redux/todo-reducer.js"
+import {setColumnTitle,
+		insertNewColumnTitle,
+		openListMenu,
+		deleteToDoColumn} from "../../Redux/board-reducer.js"
+import {setNewTodoCard,deleteCardsWithColID} from "../../Redux/todo-reducer.js"
 import TodoCardContainer from "../Card/TodoCardContainer"
 
 
@@ -14,11 +17,7 @@ class TodoContainer extends React.Component {
 			if(col.id === this.props.columnId) {
 				this.column = col
 			}
-		})
-
-		this.isCardActive = this.props.todoCards[this.props.todoCards.length-1].isCardActive
-
-		
+		})		
 	}
 	getCardActiveState() {
 		let cardActiveState = true
@@ -47,25 +46,23 @@ class TodoContainer extends React.Component {
 				newId = itemId+1
 			}			
 		})
-		const newKey = Math.floor(Math.random()*1000)
+		const newKey = Math.floor(Math.random()*10000)
 		let cardItem = {
 			colId:this.props.columnId,
 			cardId: newId,
 			key: newKey,
-			isCardActive: false,
 			isShowInfo:false,
 			title:"",
+			haveComments:false,
 			haveDescr: false,
 			description:"",
-			comments:[{
-				comId:0,
-				isCommentActive:false,
-				text:'some comment',}]
+			comments:[]
 		}
 			this.props.setNewTodoCard(cardItem)		
 	}
 	deleteTodoList() {
 		this.props.deleteToDoColumn(this.props.columnId)
+		this.props.deleteCardsWithColID(this.props.columnId)
 	}
 	showTodoCardList () {
 
@@ -73,6 +70,7 @@ class TodoContainer extends React.Component {
 			if(card.colId === this.props.columnId) {
 				return  <TodoCardContainer	
 					columnId = {this.props.columnId}
+					cardId = {card.cardId}
 					key = {card.key}
 				/>
 			}
@@ -86,6 +84,7 @@ class TodoContainer extends React.Component {
 		return  (
 			<>
 				<Todo  
+					authorName = {this.props.authorName}
 					isEditColumnTitle = {this.column.isEditColumnTitle}
 					columnTitle = {this.column.title}
 					onChangeColumTitle = {this.onChangeColumTitle.bind(this)}
@@ -110,7 +109,8 @@ class TodoContainer extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		todoColumnList: state.boardData.todoColumnList,
-		todoCards: state.todoData.cards
+		todoCards: state.todoData.cards,
+		authorName: state.boardData.authorName
 	}
 }
 const mapDispatchToProps = {
@@ -118,6 +118,7 @@ const mapDispatchToProps = {
 	insertNewColumnTitle,
 	setNewTodoCard,
 	openListMenu,
-	deleteToDoColumn
+	deleteToDoColumn,
+	deleteCardsWithColID
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer)

@@ -1,25 +1,58 @@
+const SET_AUTHOR_NAME = "SET-AUTHOR-NAME"
 const SET_TODO_COLUMN = "SET-TODO-COLUMN"
 const SET_COLUMN_TITLE = "SET-COLUMN-TITLE"
 const INSERT_NEW_COLUMN_TITLE = "INSERT-NEW-COLUMN-TITLE"
 const  DELETE_TODO_COLUMN = "DELETE-TODO-COLUMN"
 const OPEN_LIST_MENU = "OPEN-LIST-MENU"
-
+const SET_LOCAL_COL_DATA = "SET-LOCAL_COL-DATA"
 
 let initialState = {
+    isAuth:false,
+    authorName:"",
 	todoColumnList:[
         {
-            id:0,
-            key:0,
-			title:"ToDo",
-			isColumnActive: true,
-            isEditColumnTitle: false,
-            isMenuActive: false
+			id:0,
+			key:0,
+			title:"TODO",
+			isColumnActive:true,
+			isEditColumnTitle: false,
+			isMenuActive: false
+        },
+        {
+			id:1,
+			key:1,
+			title:"In Progress",
+			isColumnActive:true,
+			isEditColumnTitle: false,
+			isMenuActive: false
+        },
+        {
+			id:2,
+			key:2,
+			title:"Testing",
+			isColumnActive:true,
+			isEditColumnTitle: false,
+			isMenuActive: false
+        },
+        {
+			id:3,
+			key:3,
+			title:"Done",
+			isColumnActive:true,
+			isEditColumnTitle: false,
+			isMenuActive: false
 		}
     ]
 }
 
 const boardSection = (state = initialState, action) => {
 	switch (action.type) {
+        case "SET-AUTHOR-NAME":
+            return {
+                ...state,
+                authorName:action.authorName,
+                isAuth: true
+            }
         case "SET-TODO-COLUMN":
             return {
                 ...state,
@@ -62,9 +95,21 @@ const boardSection = (state = initialState, action) => {
                 }),
                 todoColumnList:[...state.todoColumnList]
             }
+        case "SET-LOCAL_COL-DATA": {
+           return{
+            ...state,
+            todoColumnList:action.data
+           }
+        }
 		default:
 			return state;
 	}
+}
+export const setAuthorName = (authorName) => {
+    return {
+        type: SET_AUTHOR_NAME,
+        authorName
+    }
 }
 
 export const setTodoColumn = (todoColumn) => {
@@ -99,5 +144,10 @@ export const openListMenu = (columnId) => {
         columnId
     }
 }
-
+export const setColFromLocalStorage = (data) => {
+    return{
+        type: SET_LOCAL_COL_DATA,
+        data
+    }
+}
 export default boardSection

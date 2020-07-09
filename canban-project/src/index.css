@@ -18,7 +18,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.board-wrap {
+.board-wrap,
+.auth-overlay {
   height: 100vh;
   width: 100%;
   background-color: #ccc;
@@ -26,6 +27,29 @@ code {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+.auth-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth-container {
+  width: 500px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 3px;
+
+}
+.auth__input {
+  font-size: 20px;
+  padding: 5px 20px;
+  margin-bottom: 20px;
+}
+.auth__submit {
+  background-color: #5aac44;
+  margin-bottom: 30px;
 }
 .board__btn {
   width: 272px;
@@ -140,10 +164,24 @@ code {
 .todo-card {
   margin-bottom: 10px;
 }
+.todo-card__icons-wrap {
+  display: flex;
+}
 .todo-card__icon {
+  margin-right: 5px;
   width: 15px;
   height: 15px;
+ 
+}
+.todo-card__icon.descr {
   background-image: url(../src/Assets/descr-icon.svg);
+}
+.todo-card__icon.comment {
+  background-image: url(../src/Assets/comment-icon.svg);
+  font-size: 10px;
+  display: flex;
+  padding-left: 18px;
+  align-items: center;
 }
 .edit-icon {
   width: 20px;
@@ -175,7 +213,8 @@ code {
 }
 
 .add-btn,
-.delete-btn {
+.delete-btn,
+.auth__submit {
   width: 130px;
   padding: 5px;
   margin-top: 10px;
@@ -242,10 +281,22 @@ code {
   border-radius: 3px;
   position: relative;
 }
-.edit-icon.descr {
+.card-info__icons {
   position: absolute;
   top: 3px;
   right: 10px;
+  display: flex;
+}
+.delete-icon {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-left: 5px;
+  cursor: pointer;
 }
 .card-info__descr-text {
   padding-left: 10px;
@@ -287,6 +338,13 @@ code {
     padding:3px 10px;
     margin-top: 5px;
     display: flex;
+}
+.card_info-comment-item {
+  display: flex;
+  max-width: 400px;
+}
+.card-info_comment-icons {
+  display: flex
 }
 .card-info__comment-text {
   background-color: #fff;

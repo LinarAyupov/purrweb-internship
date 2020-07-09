@@ -7,9 +7,13 @@ const TodoCard = (props) => {
 						onClick = {props.showCardInfo}
 					>
 						{props.cardTitle}
-					<div className="todo-card__icon-wrap">
+					<div className="todo-card__icons-wrap">
 						{props.haveDescr ?
-						<span className="todo-card__icon"></span>
+						<span className="todo-card__icon descr"></span>
+						:
+						<></>}
+						{props.haveComment ?
+						<span className="todo-card__icon comment">{props.commentsCount}</span>
 						:
 						<></>}
 					</div>
@@ -21,7 +25,7 @@ const TodoCard = (props) => {
 						className = "todo-card__input"
 						defaultValue = {props.cardTitle}
 						onChange = {props.editCardTitle}
-						onBlur = {()=>setTimeout(props.insertCardTitle,200)}
+						onBlur = {(e)=>setTimeout(props.insertCardTitle,200)}
 						placeholder = "Enter a title for this card..."
 						autoFocus = {true}
 						onKeyPress= {

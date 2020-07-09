@@ -8,27 +8,14 @@ const EDIT_CARD_DESCR = "EDIT-CARD-DESCR"
 const SET_CARD_COMMENT = "SET-CARD-COMMENT"
 const SET_CARD_COMMENT_TEXT = "SET-CARD-COMMENT-TEXT"
 const DELETE_CARD = "DELETE-CARD"
-
-
+const SET_LOCAL_CARD_DATA = "SET-LOCAL-CARD-DATA"
+const DELETE_CARD_WITH_COL_ID = "DELETE-CARD-WITH-COL-ID"
+const DELETE_CARD_DESCR ="DELETE-CARD-DESCR"
+const EDIT_CARD_COMMENT = "EDIT-CARD-COMMENT"
+const DELETE_CARD_COMMENT = "DELETE_CARD_COMMENT"
 
 let initialState = {
 	cards:[
-		{
-			colId:0,
-			cardId: 0,	
-			key:0,
-			isCardActive: false,
-			isShowInfo:false,
-			title:"",
-			haveDescr: false,
-			description:"",
-			comments:[
-				{
-					comId:0,
-					isCommentActive:false,
-					text:'some comment',}
-			]
-		}
 	]
 }
 
@@ -45,6 +32,13 @@ const todoColumn = (state = initialState, action) => {
 				...state,
                 cards:[...state.cards.filter( card => {
 					if (card.cardId!==action.cardId) return card
+				})]
+			}
+		case "DELETE-CARD-WITH-COL-ID":
+			return {
+				...state,
+				cards:[...state.cards.filter( card => {
+					if (card.colId!==action.colId) return card
 				})]
 			}
 		case "SET-NEW-CARD-TITLE": 
@@ -105,12 +99,24 @@ const todoColumn = (state = initialState, action) => {
 
 				cards:[...state.cards]
 			} 
+		case "DELETE-CARD-DESCR":
+			return {
+				...state,
+				...state.cards.forEach(card => {
+                    if(card.cardId === action.cardId && card.colId === action.colId) {
+						card.description = ""
+						card.haveDescr = false
+				}}),
+
+				cards:[...state.cards]
+			}
 		case "SET-CARD-COMMENT":
 			return {
 				...state,
 				...state.cards.forEach( card => {
 					if(card.colId === action.colId && card.cardId === action.cardId) {
 						card.comments.push(action.commentItem)
+						card.haveComments = true
 					}
 				}),
 				cards:[...state.cards]
@@ -129,6 +135,40 @@ const todoColumn = (state = initialState, action) => {
 					}
 				}),
 				cards:[...state.cards]
+			}
+		case "EDIT-CARD-COMMENT":
+			return {
+				...state,
+				...state.cards.forEach( card => {
+					if(card.colId === action.colId && card.cardId === action.cardId) {
+						card.comments.forEach(comment => {
+							if( comment.comId === action.commentId) {
+								comment.isCommentActive = false
+							}
+						})
+					}
+				}),
+				cards:[...state.cards]
+			}
+		case "DELETE_CARD_COMMENT":
+			return {
+				...state,
+				...state.cards.forEach( card => {
+					if(card.colId === action.colId && card.cardId === action.cardId) {
+						card.comments = card.comments.filter(comment => {
+							if(comment.comId !== action.commentId) return comment
+						})
+						if(card.comments.length === 0) {
+							card.haveComments = false
+						}
+					}
+				}),
+				cards:[...state.cards]
+			}
+		case "SET-LOCAL-CARD-DATA": 
+			return {
+				...state,
+				cards:action.data
 			}
 		default:
 			return state;
@@ -188,9 +228,32 @@ export const setCardCommentText = (colId,cardId,commentId,commentText) => {
 		commentText
 	}
 }
+export const editCardComment = (colId,cardId,commentId)=> {
+	return {
+		type:EDIT_CARD_COMMENT,
+		colId,
+		cardId,
+		commentId
+	}
+}
+export const deleteComment = (colId,cardId,commentId) => {
+	return {
+		type: DELETE_CARD_COMMENT,
+		colId,
+		cardId,
+		commentId
+	}
+}
 export const editCardDescr = (cardId,colId) => {
 	return {
 		type: EDIT_CARD_DESCR,
+		cardId,
+		colId
+	}
+}
+export const deleteCardDescr = (cardId,colId) => {
+	return {
+		type: DELETE_CARD_DESCR,
 		cardId,
 		colId
 	}
@@ -202,5 +265,16 @@ export const deleteCard = (cardId) => {
 	}
 	
 }
-
+export const setCardFromLocalStorage = (data) => {
+    return{
+        type: SET_LOCAL_CARD_DATA,
+        data
+    }
+}
+export const deleteCardsWithColID = (colId) => {
+	return {
+		type: DELETE_CARD_WITH_COL_ID,
+		colId
+	}
+}
 export default todoColumn

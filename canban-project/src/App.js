@@ -1,12 +1,23 @@
 import React from 'react';
 import BoardContainer from "./Components/Board/BoardContainer"
+import { connect } from 'react-redux';
+import AuthContainer from './Components/Auth/AuthContainer';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <BoardContainer/>
+      {
+        props.isAuth ?
+        <BoardContainer/> :
+        <AuthContainer/>
+      }
     </div>
   );
 }
+const mapStateToProps = (state) =>{
+  return {
+      isAuth: state.boardData.isAuth
+  }
+}
 
-export default App;
+export default connect(mapStateToProps)(App);

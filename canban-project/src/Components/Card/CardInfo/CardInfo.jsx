@@ -37,13 +37,19 @@ const CardInfo = (props) => {
                     {props.cardDescr}
                     </p>
                     {   props.haveDescr ?
-                        <div className="edit-icon descr" onClick={props.editCardDescription}></div> :
+                        <div className="card-info__icons">
+                        <span className="edit-icon descr" onClick={props.editCardDescription}></span>
+                        <span className="delete-icon" onClick={props.deleteDescription}>&times;</span>
+                        </div>
+                        :
                          <div>
                               <textarea 
                                 ref = {props.descrInputRef}
                                 name="description"
                                 rows = "3"
-                                className ="card-info__input-text"></textarea>
+                                className ="card-info__input-text">
+                                    {props.cardDescr}
+                                </textarea>
                             <button className ="add-btn"
                                 onClick = {props.addNewDescription}>
                                 Add description

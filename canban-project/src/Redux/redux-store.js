@@ -1,12 +1,12 @@
-import {combineReducers, createStore} from "redux"
+import { combineReducers, createStore } from "redux"
 import todoColumn from "./todo-reducer"
 import boardSection from "./board-reducer"
 
 
 let reducers = combineReducers(
     {
-    todoData: todoColumn,
-    boardData:boardSection,
+        todoData: todoColumn,
+        boardData: boardSection,
 
     }
 )

@@ -8,15 +8,15 @@ function App(props) {
     <div className="App">
       {
         props.isAuth ?
-        <BoardContainer/> :
-        <AuthContainer/>
+          <BoardContainer /> :
+          <AuthContainer />
       }
     </div>
   );
 }
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
   return {
-      isAuth: state.boardData.isAuth
+    isAuth: state.boardData.isAuth
   }
 }
 

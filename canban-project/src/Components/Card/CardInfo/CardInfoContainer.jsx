@@ -1,7 +1,7 @@
 import React from "react"
 import CardInfo from "./CardInfo"
 import { connect } from "react-redux"
-import {setCardDescr,editCardDescr,deleteCardDescr} from "../../../Redux/todo-reducer"
+import { setCardDescr, editCardDescr, deleteCardDescr } from "../../../Redux/todo-reducer"
 
 
 class CardInfoContainer extends React.Component {
@@ -11,32 +11,34 @@ class CardInfoContainer extends React.Component {
     }
     addNewDescription() {
         let descrText = this.descrInputRef.current.value
-        this.props.setCardDescr(descrText,this.props.cardId,this.props.colId)
+        this.props.setCardDescr(descrText, this.props.cardId, this.props.colId)
     }
     editCardDescription() {
-        this.props.editCardDescr(this.props.cardId,this.props.colId)
+        this.props.editCardDescr(this.props.cardId, this.props.colId)
     }
     deleteDescription() {
-        this.props.deleteCardDescr(this.props.cardId,this.props.colId)
+        this.props.deleteCardDescr(this.props.cardId, this.props.colId)
     }
     render() {
         return <CardInfo
-                cardTitle = {this.props.cardTitle}
-                showCardInfo = {this.props.showCardInfo}
-                descrInputRef = {this.descrInputRef}
-                addNewDescription = {this.addNewDescription.bind(this)}
-                cardDescr = {this.props.cardDescr}
-                addCardComment = {this.props.addCardComment}
-                showCardComments = {this.props.showCardComments}
-                isCommentAdded = {this.props.isCommentAdded}
-                haveDescr = {this.props.haveDescr}
-                editCardDescription = {this.editCardDescription.bind(this)}
-                insertCardTitle = {this.props.insertCardTitle}
-                editCardTitle = {this.props.editCardTitle}
-                isCardActive = {this.props.isCardActive}
-                deleteCard = {this.props.deleteCard}
-                deleteDescription = {this.deleteDescription.bind(this)}
-            />
+            authorName={this.props.authorName}
+            colTitle={this.props.colTitle}
+            cardTitle={this.props.cardTitle}
+            renderCardInfoWindow={this.props.renderCardInfoWindow}
+            descrInputRef={this.descrInputRef}
+            addNewDescription={this.addNewDescription.bind(this)}
+            cardDescr={this.props.cardDescr}
+            addCardComment={this.props.addCardComment}
+            showCardComments={this.props.showCardComments}
+            isCommentAdded={this.props.isCommentAdded}
+            haveDescr={this.props.haveDescr}
+            editCardDescription={this.editCardDescription.bind(this)}
+            insertCardTitle={this.props.insertCardTitle}
+            editCardTitle={this.props.editCardTitle}
+            isCardActive={this.props.isCardActive}
+            deleteCard={this.props.deleteCard}
+            deleteDescription={this.deleteDescription.bind(this)}
+        />
     }
 }
 
@@ -56,4 +58,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(CardInfoContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(CardInfoContainer)

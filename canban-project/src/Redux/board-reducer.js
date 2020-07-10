@@ -12,7 +12,7 @@ let initialState = {
     todoColumnList: [
         {
             id: 0,
-            key: 0,
+            key: 4340,
             title: "TODO",
             isColumnActive: true,
             isEditColumnTitle: false,
@@ -20,7 +20,7 @@ let initialState = {
         },
         {
             id: 1,
-            key: 1,
+            key: 13454,
             title: "In Progress",
             isColumnActive: true,
             isEditColumnTitle: false,
@@ -28,7 +28,7 @@ let initialState = {
         },
         {
             id: 2,
-            key: 2,
+            key: 2654,
             title: "Testing",
             isColumnActive: true,
             isEditColumnTitle: false,
@@ -36,7 +36,7 @@ let initialState = {
         },
         {
             id: 3,
-            key: 3,
+            key: 2313,
             title: "Done",
             isColumnActive: true,
             isEditColumnTitle: false,

@@ -1,14 +1,14 @@
 import React from "react"
-import Todo from "./Todo"
+import Todo from "../components/Todo/Todo"
 import { connect } from "react-redux"
 import {
 	setColumnTitle,
 	insertNewColumnTitle,
 	openListMenu,
 	deleteToDoColumn
-} from "../../Redux/board-reducer.js"
-import { setNewTodoCard, deleteCardsWithColID } from "../../Redux/todo-reducer.js"
-import TodoCardContainer from "../Card/TodoCardContainer"
+} from "../actions/boardActions"
+import { setNewTodoCard, deleteCardsWithColID } from "../actions/columnActions"
+import TodoCardContainer from "../containers/TodoCardContainer"
 
 
 class TodoContainer extends React.Component {
@@ -21,18 +21,18 @@ class TodoContainer extends React.Component {
 			}
 		})
 	}
-	getCardActiveStatus() {
+	getCardActiveStatus = () => {
 		let cardActiveState = true
 		if (this.props.todoCards.length !== 0) {
 			cardActiveState = this.props.todoCards[this.props.todoCards.length - 1].isCardActive
 		}
 		return cardActiveState
 	}
-	onChangeColumTitle(element) {
+	onChangeColumTitle = (element) => {
 		let newTitle = element.target.value
 		this.props.setColumnTitle(newTitle, this.props.columnId)
 	}
-	insertNewColumnTitle() {
+	insertNewColumnTitle = () => {
 		if (this.column.title === "") {
 			this.column.title = "Todo list"
 			this.props.insertNewColumnTitle(this.props.columnId)
@@ -40,7 +40,7 @@ class TodoContainer extends React.Component {
 			this.props.insertNewColumnTitle(this.props.columnId)
 		}
 	}
-	addNewToDoCard() {
+	addNewToDoCard = () => {
 		let newId = 0
 		this.props.todoCards.forEach(item => {
 			let itemId = Number(item.cardId)
@@ -62,11 +62,11 @@ class TodoContainer extends React.Component {
 		}
 		this.props.setNewTodoCard(cardItem)
 	}
-	deleteTodoList() {
+	deleteTodoList = () => {
 		this.props.deleteToDoColumn(this.props.columnId)
 		this.props.deleteCardsWithColID(this.props.columnId)
 	}
-	renderTodoCardList() {
+	renderTodoCardList = () => {
 
 		return this.props.todoCards.map((card) => {
 			if (card.colId === this.props.columnId) {
@@ -80,7 +80,7 @@ class TodoContainer extends React.Component {
 		}
 		)
 	}
-	openMenu() {
+	openMenu = () => {
 		this.props.openListMenu(this.column.id)
 	}
 	render() {
@@ -90,17 +90,17 @@ class TodoContainer extends React.Component {
 					authorName={this.props.authorName}
 					isEditColumnTitle={this.column.isEditColumnTitle}
 					columnTitle={this.column.title}
-					onChangeColumTitle={this.onChangeColumTitle.bind(this)}
+					onChangeColumTitle={this.onChangeColumTitle}
 					columnId={this.column.id}
-					insertNewColumnTitle={this.insertNewColumnTitle.bind(this)}
+					insertNewColumnTitle={this.insertNewColumnTitle}
 					isColumnActive={this.column.isColumnActive}
-					addNewToDoCard={this.addNewToDoCard.bind(this)}
-					renderTodoCardList={this.renderTodoCardList.bind(this)}
+					addNewToDoCard={this.addNewToDoCard}
+					renderTodoCardList={this.renderTodoCardList}
 					todoCardsCount={this.props.todoCards.length}
 					isCardActive={this.getCardActiveStatus()}
-					openMenu={this.openMenu.bind(this)}
+					openMenu={this.openMenu}
 					isMenuActive={this.column.isMenuActive}
-					deleteTodoList={this.deleteTodoList.bind(this)}
+					deleteTodoList={this.deleteTodoList}
 				/>
 
 			</>

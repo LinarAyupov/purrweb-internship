@@ -1,7 +1,7 @@
 import React from 'react';
-import BoardContainer from "./Components/Board/BoardContainer"
+import BoardContainer from "./containers/BoardContainer"
 import { connect } from 'react-redux';
-import AuthContainer from './Components/Auth/AuthContainer';
+import AuthContainer from './containers/AuthContainer';
 
 function App(props) {
   return (

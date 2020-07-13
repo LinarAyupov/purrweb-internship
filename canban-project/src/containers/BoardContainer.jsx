@@ -1,9 +1,9 @@
 import React from "react"
-import Board from "./Board"
-import { setTodoColumn, setColFromLocalStorage } from "../../Redux/board-reducer.js"
-import { setCardFromLocalStorage } from "../../Redux/todo-reducer"
+import Board from "../components/Board/Board"
+import { setTodoColumn, setColFromLocalStorage } from "../actions/boardActions"
+import { setCardFromLocalStorage } from "../actions/columnActions"
 import { connect } from "react-redux"
-import TodoContainer from "../Todo/TodoContainer"
+import TodoContainer from "../containers/TodoContainer"
 
 
 class BoardContainer extends React.Component {
@@ -27,7 +27,7 @@ class BoardContainer extends React.Component {
 		localStorage.setItem('mainData', JSON.stringify(mainData))
 		localStorage.setItem('cardList', JSON.stringify(cardList))
 	}
-	showTodoColumns() {
+	showTodoColumns = () => {
 		if (this.props.todoColumnList.length !== 0) {
 			return this.props.todoColumnList.map(
 				(column) => <TodoContainer
@@ -37,7 +37,7 @@ class BoardContainer extends React.Component {
 			)
 		}
 	}
-	addNewTodoColumn() {
+	addNewTodoColumn = () => {
 		let newId = 0
 		this.props.todoColumnList.forEach(item => {
 			let itemId = Number(item.id)
@@ -61,8 +61,8 @@ class BoardContainer extends React.Component {
 	render() {
 		return (
 			<Board
-				addNewTodoColumn={this.addNewTodoColumn.bind(this)}
-				showTodoColumns={this.showTodoColumns.bind(this)}
+				addNewTodoColumn={this.addNewTodoColumn}
+				showTodoColumns={this.showTodoColumns}
 			/>
 		);
 	}

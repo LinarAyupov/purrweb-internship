@@ -1,5 +1,4 @@
 import React from "react"
-
 const Todo = (props) => {
 	let renderButtons = () => {
 		if (props.isColumnActive) {

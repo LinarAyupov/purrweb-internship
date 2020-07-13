@@ -1,5 +1,4 @@
 import React from "react"
-
 const TodoCard = (props) => {
 	const rendCard = () => {
 		if (props.isCardActive) {

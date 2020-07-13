@@ -83,11 +83,15 @@ code {
 
 }
 .todo-title {
-  margin:  0 0 10px 0;
+  margin:  0 20px 10px 0;
   line-height: 18px;
   font-size: 20px;
   padding: 5px 5px 8px;
+  cursor: pointer;
   
+}
+.todo-title:hover {
+  background-color: #fff;
 }
 .todo-menu {
   display: flex;

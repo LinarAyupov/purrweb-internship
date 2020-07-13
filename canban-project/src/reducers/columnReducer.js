@@ -8,7 +8,6 @@ export const EDIT_CARD_DESCR = "EDIT-CARD-DESCR"
 export const SET_CARD_COMMENT = "SET-CARD-COMMENT"
 export const SET_CARD_COMMENT_TEXT = "SET-CARD-COMMENT-TEXT"
 export const DELETE_CARD = "DELETE-CARD"
-export const SET_LOCAL_CARD_DATA = "SET-LOCAL-CARD-DATA"
 export const DELETE_CARD_WITH_COL_ID = "DELETE-CARD-WITH-COL-ID"
 export const DELETE_CARD_DESCR = "DELETE-CARD-DESCR"
 export const EDIT_CARD_COMMENT = "EDIT-CARD-COMMENT"
@@ -105,6 +104,19 @@ const actionMap = {
 			cards: [...state.cards]
 		}
 	},
+	[DELETE_CARD_DESCR]:(state,action) => {
+		return {
+			...state,
+			...state.cards.forEach(card => {
+				if (card.cardId === action.cardId && card.colId === action.colId) {
+					card.description = ""
+					card.haveDescr = false
+				}
+			}),
+
+			cards: [...state.cards]
+		}
+	},
 	[SET_CARD_COMMENT]: (state, action) => {
 		return {
 			...state,
@@ -175,12 +187,6 @@ const actionMap = {
 				}
 			}),
 			cards: [...state.cards]
-		}
-	},
-	[SET_LOCAL_CARD_DATA]: (state, action) => {
-		return {
-			...state,
-			cards: action.data
 		}
 	},
 }

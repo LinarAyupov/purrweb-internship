@@ -16,7 +16,7 @@ function App(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.boardData.isAuth
+    isAuth: state.authData.isAuth
   }
 }
 

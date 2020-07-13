@@ -11,7 +11,6 @@ import {
   EDIT_CARD_DESCR,
   DELETE_CARD_DESCR,
   DELETE_CARD,
-  SET_LOCAL_CARD_DATA,
   DELETE_CARD_WITH_COL_ID
 } from "../reducers/columnReducer"
 
@@ -106,12 +105,7 @@ export const deleteCard = (cardId) => {
   }
 
 }
-export const setCardFromLocalStorage = (data) => {
-  return {
-    type: SET_LOCAL_CARD_DATA,
-    data
-  }
-}
+
 export const deleteCardsWithColID = (colId) => {
   return {
     type: DELETE_CARD_WITH_COL_ID,

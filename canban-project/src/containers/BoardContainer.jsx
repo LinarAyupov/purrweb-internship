@@ -7,26 +7,6 @@ import TodoContainer from "../containers/TodoContainer"
 
 
 class BoardContainer extends React.Component {
-	constructor(props) {
-		super(props)
-		this.LocalStorageMainData = JSON.parse(localStorage.getItem('mainData'))
-		this.LocalStorageCardList = JSON.parse(localStorage.getItem('cardList'))
-	}
-	componentDidMount() {
-		if (this.LocalStorageMainData) {
-			this.props.setColFromLocalStorage(this.LocalStorageMainData)
-		}
-		if (this.LocalStorageCardList) {
-			this.props.setCardFromLocalStorage(this.LocalStorageCardList)
-		}
-	}
-	componentDidUpdate() {
-		let mainData = this.props.mainData
-		let cardList = this.props.todoCards
-
-		localStorage.setItem('mainData', JSON.stringify(mainData))
-		localStorage.setItem('cardList', JSON.stringify(cardList))
-	}
 	showTodoColumns = () => {
 		if (this.props.todoColumnList.length !== 0) {
 			return this.props.todoColumnList.map(
@@ -77,8 +57,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
 	setTodoColumn,
-	setColFromLocalStorage,
-	setCardFromLocalStorage
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer)

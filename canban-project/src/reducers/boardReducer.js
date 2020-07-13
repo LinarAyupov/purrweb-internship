@@ -1,14 +1,10 @@
-export const SET_AUTHOR_NAME = "SET-AUTHOR-NAME"
 export const SET_TODO_COLUMN = "SET-TODO-COLUMN"
 export const SET_COLUMN_TITLE = "SET-COLUMN-TITLE"
 export const INSERT_NEW_COLUMN_TITLE = "INSERT-NEW-COLUMN-TITLE"
 export const DELETE_TODO_COLUMN = "DELETE-TODO-COLUMN"
 export const OPEN_LIST_MENU = "OPEN-LIST-MENU"
-export const SET_LOCAL_COL_DATA = "SET-LOCAL_COL-DATA"
 
 let initialState = {
-  isAuth: false,
-  authorName: "",
   todoColumnList: [
     {
       id: 0,
@@ -48,14 +44,6 @@ let initialState = {
 
 const actionMap = {
 
-  [SET_AUTHOR_NAME]: (state, action) => {
-    return {
-      ...state,
-      authorName: action.authorName,
-      isAuth: true
-    }
-  }
-  ,
   [SET_TODO_COLUMN]: (state, action) => {
     return {
       ...state,
@@ -103,13 +91,7 @@ const actionMap = {
       todoColumnList: [...state.todoColumnList]
     }
   },
-  [SET_LOCAL_COL_DATA]: (state, action) => {
-    return {
-      ...state,
-      todoColumnList: action.data.todoColumnList
-    }
-  },
-
+  
 }
 
 export default function boardReducer(state = initialState, action) {

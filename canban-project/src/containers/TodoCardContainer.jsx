@@ -148,7 +148,7 @@ class TodoCardContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     todoCards: state.todoData.cards,
-    authorName: state.boardData.authorName
+    authorName: state.authData.authorName
   }
 }
 const mapDispatchToProps = {

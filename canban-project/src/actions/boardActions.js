@@ -1,21 +1,13 @@
 import {
-  SET_AUTHOR_NAME,
   SET_TODO_COLUMN,
   SET_COLUMN_TITLE,
   INSERT_NEW_COLUMN_TITLE,
   DELETE_TODO_COLUMN,
   OPEN_LIST_MENU,
-  SET_LOCAL_COL_DATA
 } from "../reducers/boardReducer"
 
 
 
-export const setAuthorName = (authorName) => {
-  return {
-    type: SET_AUTHOR_NAME,
-    authorName
-  }
-}
 
 export const setTodoColumn = (todoColumn) => {
   return {
@@ -47,11 +39,5 @@ export const openListMenu = (columnId) => {
   return {
     type: OPEN_LIST_MENU,
     columnId
-  }
-}
-export const setColFromLocalStorage = (data) => {
-  return {
-    type: SET_LOCAL_COL_DATA,
-    data
   }
 }

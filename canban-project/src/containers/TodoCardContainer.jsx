@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import TodoCard from "../components/TodoCard/TodoCard"
+import TodoCard from "../components/TodoCard"
 import { connect } from "react-redux"
 import {
   setNewCardTitle,

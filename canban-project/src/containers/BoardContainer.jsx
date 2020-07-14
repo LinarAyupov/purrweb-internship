@@ -1,5 +1,5 @@
 import React from "react"
-import Board from "../components/Board/Board"
+import Board from "../components/Board"
 import { setTodoColumn } from "../actions/boardActions"
 import { connect } from "react-redux"
 import TodoContainer from "../containers/TodoContainer"

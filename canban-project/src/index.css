@@ -23,7 +23,7 @@ code {
   height: 100vh;
   width: 100%;
   background-color: #ccc;
-  background-image: url('../src/Assets/canban-bg.jpg');
+  background-image: url('../src/assets/canban-bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -146,12 +146,18 @@ code {
 .todo-menu__list-btn {
   width: 100%;
   margin-bottom: 5px;
+  padding: 5px;
   text-align: left;
   background-color: #fff;
   border: none;
+  border-radius: 3px;
   outline: none;
   font-size: 16px;
   cursor: pointer;
+  transition: background .3s ease;
+}
+.todo-menu__list-btn:hover {
+  background-color: #ccc;
 }
 .todo-title__input,
 .todo-title,
@@ -180,29 +186,18 @@ code {
 }
 .todo-card__icons-wrap {
   display: flex;
+  font-size: 12px;
 }
+
+
 .todo-card__icon {
-  margin-right: 5px;
-  width: 15px;
-  height: 15px;
- 
-}
-.todo-card__icon.descr {
-  background-image: url(../src/Assets/descr-icon.svg);
-}
-.todo-card__icon.comment {
-  background-image: url(../src/Assets/comment-icon.svg);
-  font-size: 10px;
-  display: flex;
-  padding-left: 18px;
-  align-items: center;
+  margin-right: 10px;
 }
 .edit-icon {
   width: 20px;
   height: 20px;
   cursor: pointer;
   margin-left: 10px;
-  background-image: url(../src/Assets/edit-icon.svg);
 }
 .edit-icon.info {
   position: absolute;
@@ -211,14 +206,7 @@ code {
 
 }
 
-.todo-card__icon,
-.edit-icon {
-  display: block;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-top: 3px;
-}
+
 
 .todo-card__title {
   background-color: #fff;
@@ -293,7 +281,7 @@ code {
 .card-info__title-wrap > h3 {
   margin: 0;
   word-wrap: break-word;
-  max-width: 100%;
+  width: 100%;
 }
 .card-info__subtitle,
 .card-info__author { 
@@ -327,8 +315,8 @@ code {
   display: flex;
 }
 .delete-icon {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

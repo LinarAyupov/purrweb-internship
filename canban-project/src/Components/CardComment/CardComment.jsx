@@ -1,5 +1,5 @@
 import React from "react"
-
+import EditIcon from "../icons/EditIcon"
 const CardComment = (props) => {
   const comInput = React.createRef()
   const addComment = () => {
@@ -26,7 +26,7 @@ const CardComment = (props) => {
             <div className="card-info__comment-text">{props.commentText}</div>
           </div>
           <div className="card-info_comment-icons">
-            <span className="edit-icon comments" onClick={editComment}></span>
+            <span className="edit-icon comments" onClick={editComment}><EditIcon /></span>
             <span className="delete-icon comments" onClick={deleteComment}>&times;</span>
           </div>
         </div> :

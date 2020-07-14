@@ -1,5 +1,5 @@
 import React from "react"
-import CardInfo from "../components/CardInfo/CardInfo"
+import CardInfo from "../components/CardInfo"
 import { connect } from "react-redux"
 import { setCardDescr, editCardDescr, deleteCardDescr } from "../actions/columnActions"
 import {

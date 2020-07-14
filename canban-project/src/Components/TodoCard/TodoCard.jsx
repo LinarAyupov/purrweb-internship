@@ -1,4 +1,9 @@
 import React from "react"
+import DescriptionIcon from "../icons/DescriptionIcon"
+import CommentIcon from "../icons/CommentIcon"
+
+
+
 const TodoCard = (props) => {
 	const rendCard = () => {
 		if (props.isCardActive) {
@@ -7,11 +12,13 @@ const TodoCard = (props) => {
 				{props.cardTitle}
 				<div className="todo-card__icons-wrap">
 					{props.haveDescr ?
-						<span className="todo-card__icon descr"></span>
+						<span className=" todo-card__icon"><DescriptionIcon width={14} height={15} className="" /></span>
 						:
 						<></>}
 					{props.haveComment ?
-						<span className="todo-card__icon comment">{props.commentsCount}</span>
+						<>
+							<CommentIcon width={15} height={17} /> <span>{props.commentsCount}</span>
+						</>
 						:
 						<></>}
 				</div>

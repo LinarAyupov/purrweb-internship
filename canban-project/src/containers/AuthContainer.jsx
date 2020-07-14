@@ -1,5 +1,5 @@
 import React from "react"
-import Auth from "../components/Auth/Auth"
+import Auth from "../components/Auth"
 import { connect } from "react-redux"
 import { setAuthorName } from "../actions/authActions"
 

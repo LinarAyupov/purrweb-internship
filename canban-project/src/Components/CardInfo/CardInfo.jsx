@@ -1,4 +1,5 @@
 import React from "react"
+import EditIcon from "../icons/EditIcon"
 
 const CardInfo = (props) => {
   return (
@@ -29,11 +30,11 @@ const CardInfo = (props) => {
 
               <div className="card-info__title">
                 <div className="card-info__title-wrap">
-                  <h3>{props.cardTitle} </h3>
+                  <h3 onClick={props.insertCardTitle}>{props.cardTitle} </h3>
                   <span className="card-info__subtitle">In list: <span className="card-info__list-title">{props.colTitle}</span></span>
                   <span className="card-info__author">Author: <span className="card-info__author-name"> {props.authorName}</span></span>
                 </div>
-                <span className="edit-icon info" onClick={props.insertCardTitle}></span>
+                <span className="edit-icon info" onClick={props.insertCardTitle}><EditIcon /></span>
               </div>}
           </header>
           <div className="card-info__descr">
@@ -43,7 +44,7 @@ const CardInfo = (props) => {
             </p>
             {props.haveDescr ?
               <div className="card-info__icons">
-                <span className="edit-icon descr" onClick={props.editCardDescription}></span>
+                <span className="edit-icon descr" onClick={props.editCardDescription}><EditIcon /></span>
                 <span className="delete-icon" onClick={props.deleteDescription}>&times;</span>
               </div>
               :

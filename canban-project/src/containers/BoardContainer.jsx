@@ -1,7 +1,6 @@
 import React from "react"
 import Board from "../components/Board/Board"
-import { setTodoColumn, setColFromLocalStorage } from "../actions/boardActions"
-import { setCardFromLocalStorage } from "../actions/columnActions"
+import { setTodoColumn } from "../actions/boardActions"
 import { connect } from "react-redux"
 import TodoContainer from "../containers/TodoContainer"
 

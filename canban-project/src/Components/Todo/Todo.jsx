@@ -45,7 +45,7 @@ const Todo = (props) => {
 					/> :
 					<header className="todo__header">
 						<h1 className="todo-title" onClick={props.insertNewColumnTitle}>{props.columnTitle}</h1>
-						<div className="todo-menu" onClick={props.openMenu} tabIndex={0} onBlur = {props.openMenu}>
+						<div className="todo-menu" onClick={props.openMenu} tabIndex={0} onBlur={() => setTimeout(props.openMenu, 300)}>
 							<div className="todo-menu__icon">
 								<span></span>
 								<span></span>
@@ -60,7 +60,7 @@ const Todo = (props) => {
 									<span className="todo-menu__close" onClick={props.openMenu}>&times;</span>
 									</h3>
 									<button className="todo-menu__list-btn" onClick={props.insertNewColumnTitle}>Edit list title</button>
-									<button className="todo-menu__list-btn" onClick={props.deleteTodoList}>Delate list</button>
+									<button className="todo-menu__list-btn" onClick={props.deleteTodoList}>Delete list</button>
 								</div>
 								:
 								<div></div>

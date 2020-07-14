@@ -8,6 +8,7 @@ import {
 	deleteToDoColumn
 } from "../actions/boardActions"
 import { setNewTodoCard, deleteCardsWithColID } from "../actions/columnActions"
+import { deleteAllCommentsInsideCollumn } from "../actions/commentActions"
 import TodoCardContainer from "../containers/TodoCardContainer"
 
 
@@ -55,19 +56,17 @@ class TodoContainer extends React.Component {
 			key: newKey,
 			isShowInfo: false,
 			title: "",
-			haveComments: false,
 			haveDescr: false,
 			description: "",
-			comments: []
 		}
 		this.props.setNewTodoCard(cardItem)
 	}
-	deleteTodoList = () => {
+	deleteTodoList() {
 		this.props.deleteToDoColumn(this.props.columnId)
 		this.props.deleteCardsWithColID(this.props.columnId)
+		this.props.deleteAllCommentsInsideCollumn(this.props.columnId)
 	}
 	renderTodoCardList = () => {
-
 		return this.props.todoCards.map((card) => {
 			if (card.colId === this.props.columnId) {
 				return <TodoCardContainer
@@ -100,7 +99,7 @@ class TodoContainer extends React.Component {
 					isCardActive={this.getCardActiveStatus()}
 					openMenu={this.openMenu}
 					isMenuActive={this.column.isMenuActive}
-					deleteTodoList={this.deleteTodoList}
+					deleteTodoList={this.deleteTodoList.bind(this)}
 				/>
 
 			</>
@@ -122,6 +121,7 @@ const mapDispatchToProps = {
 	setNewTodoCard,
 	openListMenu,
 	deleteToDoColumn,
-	deleteCardsWithColID
+	deleteCardsWithColID,
+	deleteAllCommentsInsideCollumn
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer)

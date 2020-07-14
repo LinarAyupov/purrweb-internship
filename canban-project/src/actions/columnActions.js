@@ -4,10 +4,6 @@ import {
   INSERT_CARD_TITLE,
   SHOW_CARD_INFO,
   SET_CARD_DESCR,
-  SET_CARD_COMMENT,
-  SET_CARD_COMMENT_TEXT,
-  EDIT_CARD_COMMENT,
-  DELETE_CARD_COMMENT,
   EDIT_CARD_DESCR,
   DELETE_CARD_DESCR,
   DELETE_CARD,
@@ -50,40 +46,7 @@ export const setCardDescr = (descrText, cardId, colId) => {
   }
 }
 
-export const setCardComments = (colId, cardId, commentItem) => {
-  return {
-    type: SET_CARD_COMMENT,
-    colId,
-    cardId,
-    commentItem
-  }
-}
 
-export const setCardCommentText = (colId, cardId, commentId, commentText) => {
-  return {
-    type: SET_CARD_COMMENT_TEXT,
-    colId,
-    cardId,
-    commentId,
-    commentText
-  }
-}
-export const editCardComment = (colId, cardId, commentId) => {
-  return {
-    type: EDIT_CARD_COMMENT,
-    colId,
-    cardId,
-    commentId
-  }
-}
-export const deleteComment = (colId, cardId, commentId) => {
-  return {
-    type: DELETE_CARD_COMMENT,
-    colId,
-    cardId,
-    commentId
-  }
-}
 export const editCardDescr = (cardId, colId) => {
   return {
     type: EDIT_CARD_DESCR,

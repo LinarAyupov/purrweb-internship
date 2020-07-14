@@ -6,14 +6,10 @@ import {
   setNewCardTitle,
   insertCardTitle,
   showCardInfo,
-  setCardComments,
-  setCardCommentText,
   deleteCard,
-  editCardComment,
-  deleteComment
 } from "../actions/columnActions"
+import { deleteAllCommentsInsideCard } from "../actions/commentActions"
 import CardInfoContainer from "../containers/CardInfoContainer"
-import CardComment from "../components/CardComment/CardComment"
 
 
 
@@ -24,17 +20,24 @@ class TodoCardContainer extends React.Component {
     this.props.todoCards.forEach((card) => {
       if (card.colId === this.props.columnId && card.cardId === this.props.cardId) {
         this.card = card
-
       }
     })
-
+    this.commentsCount = 0
   }
-  getCommentActiveState = () => {
-    let commentActive = true
-    if (this.card.comments.length !== 0) {
-      commentActive = this.card.comments[this.card.comments.length - 1].isCommentActive
-    }
-    return commentActive
+  UNSAFE_componentWillMount() {
+    this.props.commentsList.forEach(comment => {
+      if (comment.colId === this.props.columnId && comment.cardId === this.props.cardId) {
+        this.commentsCount++
+      }
+    })
+  }
+  componentDidUpdate() {
+    this.commentsCount = 0
+    this.props.commentsList.forEach(comment => {
+      if (comment.colId === this.props.columnId && comment.cardId === this.props.cardId) {
+        this.commentsCount++
+      }
+    })
   }
   editCardTitle = (e) => {
     const cardId = this.card.cardId
@@ -46,62 +49,12 @@ class TodoCardContainer extends React.Component {
   }
   deleteCard = () => {
     this.props.deleteCard(this.card.cardId)
+    this.props.deleteAllCommentsInsideCard(this.card.cardId)
   }
   renderCardInfoWindow = (e) => {
     this.props.showCardInfo(this.card.cardId, this.card.colId)
   }
-  addCardComment = () => {
-    let newComId = 0
-    this.card.comments.forEach(comment => {
-      let commId = Number(comment.comId)
-      if (commId >= newComId) {
-        newComId = commId + 1
-      }
-    })
-    let newKey = Math.floor(Math.random() * 10000)
-    const colId = this.card.colId
-    const cardId = this.card.cardId
-    const commentItem = {
-      comId: newComId,
-      key: newKey,
-      isCommentActive: false,
-      text: '',
-    }
-    this.props.setCardComments(colId, cardId, commentItem)
-  }
-  addCommentText = (comText, comId) => {
-    let commentText = comText
-    const colId = this.card.colId
-    const cardId = this.card.cardId
-    const commentId = comId
 
-    this.props.setCardCommentText(colId, cardId, commentId, commentText)
-  }
-  editCardComment = (comId) => {
-    const colId = this.card.colId
-    const cardId = this.card.cardId
-    this.props.editCardComment(colId, cardId, comId)
-  }
-  deleteCardComment = (comId) => {
-    const colId = this.card.colId
-    const cardId = this.card.cardId
-    this.props.deleteComment(colId, cardId, comId)
-  }
-  showCardComments() {
-    return this.card.comments.map((comment) => {
-      return <CardComment
-        commentText={comment.text}
-        isCommentActive={comment.isCommentActive}
-        commentId={comment.comId}
-        addCommentText={this.addCommentText}
-        editCardComment={this.editCardComment}
-        deleteCardComment={this.deleteCardComment}
-        key={comment.key}
-        authorName={this.props.authorName}
-
-      />
-    })
-  }
   render() {
     return (
       <>
@@ -113,8 +66,8 @@ class TodoCardContainer extends React.Component {
           renderCardInfoWindow={this.renderCardInfoWindow}
           haveDescr={this.card.haveDescr}
           isShowInfo={this.card.isShowInfo}
-          haveComment={this.card.haveComments}
-          commentsCount={this.card.comments.length}
+          haveComment={this.commentsCount !== 0 ? true : false}
+          commentsCount={this.commentsCount}
         />
         {
           this.card.isShowInfo ?
@@ -126,9 +79,6 @@ class TodoCardContainer extends React.Component {
               cardId={this.card.cardId}
               colId={this.card.colId}
               cardDescr={this.card.description}
-              addCardComment={this.addCardComment}
-              showCardComments={this.showCardComments.bind(this)}
-              isCommentAdded={this.getCommentActiveState()}
               haveDescr={this.card.haveDescr}
               insertCardTitle={this.insertCardTitle}
               editCardTitle={this.editCardTitle}
@@ -148,17 +98,15 @@ class TodoCardContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     todoCards: state.todoData.cards,
-    authorName: state.authData.authorName
+    authorName: state.authData.authorName,
+    commentsList: state.commentsData.comments
   }
 }
 const mapDispatchToProps = {
   setNewCardTitle,
   insertCardTitle,
   showCardInfo,
-  setCardComments,
-  setCardCommentText,
-  editCardComment,
-  deleteComment,
-  deleteCard
+  deleteCard,
+  deleteAllCommentsInsideCard
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoCardContainer)

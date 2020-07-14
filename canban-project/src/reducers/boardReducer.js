@@ -91,7 +91,7 @@ const actionMap = {
       todoColumnList: [...state.todoColumnList]
     }
   },
-  
+
 }
 
 export default function boardReducer(state = initialState, action) {

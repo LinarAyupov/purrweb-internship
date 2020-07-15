@@ -4,7 +4,7 @@ import {
   INSERT_NEW_COLUMN_TITLE,
   DELETE_TODO_COLUMN,
   OPEN_LIST_MENU,
-} from "../reducers/boardReducer"
+} from "../reducers/columnsReducer"
 
 
 

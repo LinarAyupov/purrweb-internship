@@ -1,59 +1,64 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import TodoCard from "../components/TodoCard"
-import { connect } from "react-redux"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TodoCard from '../components/TodoCard';
+import { connect } from 'react-redux';
 import {
   setNewCardTitle,
   insertCardTitle,
   showCardInfo,
   deleteCard,
-} from "../actions/columnActions"
-import { deleteAllCommentsInsideCard } from "../actions/commentActions"
-import CardInfoContainer from "../containers/CardInfoContainer"
-
-
+} from '../actions/cardsActions';
+import { deleteAllCommentsInsideCard } from '../actions/commentActions';
+import CardInfoContainer from '../containers/CardInfoContainer';
+import { getAuthor, getCardsList, getCommentsList } from '../selectors/selectors';
 
 class TodoCardContainer extends React.Component {
   constructor(props) {
-    super(props)
-    this.card = {}
+    super(props);
+    this.card = {};
     this.props.todoCards.forEach((card) => {
       if (card.colId === this.props.columnId && card.cardId === this.props.cardId) {
-        this.card = card
+        this.card = card;
       }
-    })
-    this.commentsCount = 0
+    });
+    this.commentsCount = 0;
   }
+
   UNSAFE_componentWillMount() {
-    this.props.commentsList.forEach(comment => {
+    this.props.commentsList.forEach((comment) => {
       if (comment.colId === this.props.columnId && comment.cardId === this.props.cardId) {
-        this.commentsCount++
+        this.commentsCount++;
       }
-    })
+    });
   }
+
   componentDidUpdate() {
-    this.commentsCount = 0
-    this.props.commentsList.forEach(comment => {
+    this.commentsCount = 0;
+    this.props.commentsList.forEach((comment) => {
       if (comment.colId === this.props.columnId && comment.cardId === this.props.cardId) {
-        this.commentsCount++
+        this.commentsCount++;
       }
-    })
+    });
   }
+
   editCardTitle = (e) => {
-    const cardId = this.card.cardId
-    let newTitle = e.target.value
-    this.props.setNewCardTitle(cardId, newTitle)
-  }
+    const cardId = this.card.cardId;
+    let newTitle = e.target.value;
+    this.props.setNewCardTitle(cardId, newTitle);
+  };
+
   insertCardTitle = () => {
-    this.props.insertCardTitle(this.card.cardId)
-  }
+    this.props.insertCardTitle(this.card.cardId);
+  };
+
   deleteCard = () => {
-    this.props.deleteCard(this.card.cardId)
-    this.props.deleteAllCommentsInsideCard(this.card.cardId)
-  }
+    this.props.deleteCard(this.card.cardId);
+    this.props.deleteAllCommentsInsideCard(this.card.cardId);
+  };
+
   renderCardInfoWindow = (e) => {
-    this.props.showCardInfo(this.card.cardId, this.card.colId)
-  }
+    this.props.showCardInfo(this.card.cardId, this.card.colId);
+  };
 
   render() {
     return (
@@ -69,9 +74,9 @@ class TodoCardContainer extends React.Component {
           haveComment={this.commentsCount !== 0 ? true : false}
           commentsCount={this.commentsCount}
         />
-        {
-          this.card.isShowInfo ?
-            ReactDOM.createPortal(<CardInfoContainer
+        {this.card.isShowInfo ? (
+          ReactDOM.createPortal(
+            <CardInfoContainer
               colTitle={this.props.colTitle}
               cardTitle={this.card.title}
               authorName={this.props.authorName}
@@ -86,27 +91,29 @@ class TodoCardContainer extends React.Component {
               deleteCard={this.deleteCard}
               key={this.props.key}
             />,
-              document.getElementById('card-info__modal')) :
-            <div></div>
-        }
+            document.getElementById('card-info__modal')
+          )
+        ) : (
+          <div></div>
+        )}
       </>
-    )
+    );
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {
-    todoCards: state.todoData.cards,
-    authorName: state.authData.authorName,
-    commentsList: state.commentsData.comments
-  }
-}
+    todoCards: getCardsList(state),
+    authorName: getAuthor(state),
+    commentsList: getCommentsList(state),
+  };
+};
+
 const mapDispatchToProps = {
   setNewCardTitle,
   insertCardTitle,
   showCardInfo,
   deleteCard,
-  deleteAllCommentsInsideCard
-}
-export default connect(mapStateToProps, mapDispatchToProps)(TodoCardContainer)
+  deleteAllCommentsInsideCard,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TodoCardContainer);

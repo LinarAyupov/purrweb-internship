@@ -116,7 +116,7 @@ const actionMap = {
 
 }
 
-export default function todoColumnReducer(state = initialState, action) {
+export default function columnReducer(state = initialState, action) {
 	const reduceFn = actionMap[action.type];
 	return reduceFn ? reduceFn(state, action) : state;
 }

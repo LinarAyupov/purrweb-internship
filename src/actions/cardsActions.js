@@ -8,7 +8,7 @@ import {
   DELETE_CARD_DESCR,
   DELETE_CARD,
   DELETE_CARD_WITH_COL_ID
-} from "../reducers/columnReducer"
+} from "../reducers/cardsReducer"
 
 
 export const setNewTodoCard = (cardItem) => {

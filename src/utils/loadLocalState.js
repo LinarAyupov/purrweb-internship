@@ -1,11 +1,8 @@
-
-
 export const loadState = () => {
-  const localStorageState = localStorage.getItem("state")
-  if(!localStorageState) {
-    return {}
+  const localStorageState = localStorage.getItem("state");
+  if (!localStorageState) {
+    return {};
   } else {
-    return JSON.parse(localStorageState)
+    return JSON.parse(localStorageState);
   }
- 
-}
+};

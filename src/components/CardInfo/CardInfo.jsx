@@ -5,7 +5,7 @@ const CardInfo = (props) => {
   return (
     <>
       <div className="card-info">
-        <div className="test" onClick={props.renderCardInfoWindow} />
+        <div className="test" onClick={props.toggleCardInfoWindow} />
         <div
           className="card-info__wrap"
           id="card-info__wrap"
@@ -15,7 +15,7 @@ const CardInfo = (props) => {
           }}
         >
           <header className="card-info__header">
-            <span className="card-info__close" onClick={props.renderCardInfoWindow}>
+            <span className="card-info__close" onClick={props.toggleCardInfoWindow}>
               &times;
             </span>
             {!props.isCardActive ? (

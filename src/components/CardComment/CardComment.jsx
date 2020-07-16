@@ -10,12 +10,15 @@ const CardComment = (props) => {
       props.addCommentText(comInput.current.value, comId);
     }
   };
+
   const editComment = () => {
     props.editCardComment(props.commentId);
   };
+
   const deleteComment = () => {
     props.deleteCardComment(props.commentId);
   };
+
   return (
     <div className="card-info__comment-wrap">
       {props.isCommentActive ? (

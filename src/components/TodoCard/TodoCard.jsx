@@ -6,7 +6,7 @@ const TodoCard = (props) => {
   const rendCard = () => {
     if (props.isCardActive) {
       return (
-        <div className="todo-card__title" onClick={props.renderCardInfoWindow}>
+        <div className="todo-card__title" onClick={props.toggleCardInfoWindow}>
           {props.cardTitle}
           <div className="todo-card__icons-wrap">
             {props.haveDescr ? (

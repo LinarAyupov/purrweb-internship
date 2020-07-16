@@ -9,7 +9,7 @@ import {
   setCardCommentText,
 } from '../actions/commentActions';
 import CardComment from '../components/CardComment/CardComment';
-import { getCommentsList } from '../selectors/selectors';
+import { getCommentsList, getCardCommentsList } from '../selectors/selectors';
 
 class CardInfoContainer extends React.Component {
   constructor(props) {
@@ -81,21 +81,19 @@ class CardInfoContainer extends React.Component {
   };
 
   showCardComments = () => {
-    return this.props.commentsList.map((comment) => {
-      if (comment.colId === this.props.colId && comment.cardId === this.props.cardId) {
-        return (
-          <CardComment
-            commentText={comment.text}
-            isCommentActive={comment.isCommentActive}
-            commentId={comment.comId}
-            addCommentText={this.addCommentText}
-            editCardComment={this.editCardComment}
-            deleteCardComment={this.deleteCardComment}
-            key={comment.key}
-            authorName={this.props.authorName}
-          />
-        );
-      }
+    return this.props.cardComments.map((comment) => {
+      return (
+        <CardComment
+          commentText={comment.text}
+          isCommentActive={comment.isCommentActive}
+          commentId={comment.comId}
+          addCommentText={this.addCommentText}
+          editCardComment={this.editCardComment}
+          deleteCardComment={this.deleteCardComment}
+          key={comment.key}
+          authorName={this.props.authorName}
+        />
+      );
     });
   };
 
@@ -105,7 +103,7 @@ class CardInfoContainer extends React.Component {
         authorName={this.props.authorName}
         colTitle={this.props.colTitle}
         cardTitle={this.props.cardTitle}
-        renderCardInfoWindow={this.props.renderCardInfoWindow}
+        toggleCardInfoWindow={this.props.toggleCardInfoWindow}
         descrInputRef={this.descrInputRef}
         addNewDescription={this.addNewDescription}
         cardDescr={this.props.cardDescr}
@@ -124,9 +122,10 @@ class CardInfoContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     commentsList: getCommentsList(state),
+    cardComments: getCardCommentsList(state, props),
   };
 };
 const mapDispatchToProps = {

@@ -10,31 +10,14 @@ import {
 } from '../actions/cardsActions';
 import { deleteAllCommentsInsideCard } from '../actions/commentActions';
 import CardInfoContainer from '../containers/CardInfoContainer';
-import { getAuthor, getCardsList, getCommentsList } from '../selectors/selectors';
+import {
+  getAuthor,
+  getCardsList,
+  getCommentsList,
+  getCardCommentsList,
+} from '../selectors/selectors';
 
 class TodoCardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.commentsCount = 0;
-  }
-
-  UNSAFE_componentWillMount() {
-    this.props.commentsList.forEach((comment) => {
-      if (comment.colId === this.props.columnId && comment.cardId === this.props.card.cardId) {
-        this.commentsCount++;
-      }
-    });
-  }
-
-  componentDidUpdate() {
-    this.commentsCount = 0;
-    this.props.commentsList.forEach((comment) => {
-      if (comment.colId === this.props.columnId && comment.cardId === this.props.card.cardId) {
-        this.commentsCount++;
-      }
-    });
-  }
-
   editCardTitle = (e) => {
     const cardId = this.props.card.cardId;
     let newTitle = e.target.value;
@@ -50,7 +33,7 @@ class TodoCardContainer extends React.Component {
     this.props.deleteAllCommentsInsideCard(this.props.card.cardId);
   };
 
-  renderCardInfoWindow = (e) => {
+  toggleCardInfoWindow = (e) => {
     this.props.showCardInfo(this.props.card.cardId, this.props.card.colId);
   };
 
@@ -62,11 +45,11 @@ class TodoCardContainer extends React.Component {
           isCardActive={this.props.card.isCardActive}
           editCardTitle={this.editCardTitle}
           insertCardTitle={this.insertCardTitle}
-          renderCardInfoWindow={this.renderCardInfoWindow}
+          toggleCardInfoWindow={this.toggleCardInfoWindow}
           haveDescr={this.props.card.haveDescr}
           isShowInfo={this.props.card.isShowInfo}
-          haveComment={this.commentsCount !== 0 ? true : false}
-          commentsCount={this.commentsCount}
+          haveComment={this.props.cardComments.length !== 0 ? true : false}
+          commentsCount={this.props.cardComments.length}
         />
         {this.props.card.isShowInfo ? (
           ReactDOM.createPortal(
@@ -74,7 +57,7 @@ class TodoCardContainer extends React.Component {
               colTitle={this.props.colTitle}
               cardTitle={this.props.card.title}
               authorName={this.props.authorName}
-              renderCardInfoWindow={this.renderCardInfoWindow}
+              toggleCardInfoWindow={this.toggleCardInfoWindow}
               cardId={this.props.card.cardId}
               colId={this.props.card.colId}
               cardDescr={this.props.card.description}
@@ -95,11 +78,12 @@ class TodoCardContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     todoCards: getCardsList(state),
     authorName: getAuthor(state),
     commentsList: getCommentsList(state),
+    cardComments: getCardCommentsList(state, props),
   };
 };
 

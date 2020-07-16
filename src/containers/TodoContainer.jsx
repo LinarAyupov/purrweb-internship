@@ -10,13 +10,9 @@ import {
 import { setNewTodoCard, deleteCardsWithColID } from '../actions/cardsActions';
 import { deleteAllCommentsInsideColumn } from '../actions/commentActions';
 import TodoCardContainer from '../containers/TodoCardContainer';
-import { getColumnsList, getCardsList, getCommentsList } from '../selectors/selectors';
+import { getCardsList, getCommentsList, getColumnCardsList } from '../selectors/selectors';
 
 class TodoContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getCardActiveStatus = () => {
     let cardActiveState = true;
     if (this.props.todoCards.length !== 0) {
@@ -67,18 +63,14 @@ class TodoContainer extends React.Component {
   };
 
   renderTodoCardList = () => {
-    return this.props.todoCards.map((card) => {
-      if (card.colId === this.props.column.id) {
-        return (
-          <TodoCardContainer
-            columnId={this.props.column.id}
-            key={card.key}
-            colTitle={this.props.column.title}
-            card={card}
-          />
-        );
-      }
-    });
+    return this.props.columnCard.map((card) => (
+      <TodoCardContainer
+        columnId={this.props.column.id}
+        key={card.key}
+        colTitle={this.props.column.title}
+        card={card}
+      />
+    ));
   };
 
   openMenu = () => {
@@ -93,12 +85,10 @@ class TodoContainer extends React.Component {
           isEditColumnTitle={this.props.column.isEditColumnTitle}
           columnTitle={this.props.column.title}
           onChangeColumTitle={this.onChangeColumTitle}
-          columnId={this.props.column.id}
           insertNewColumnTitle={this.insertNewColumnTitle}
           isColumnActive={this.props.column.isColumnActive}
           addNewToDoCard={this.addNewToDoCard}
           renderTodoCardList={this.renderTodoCardList}
-          todoCardsCount={this.props.todoCards.length}
           isCardActive={this.getCardActiveStatus()}
           openMenu={this.openMenu}
           isMenuActive={this.props.column.isMenuActive}
@@ -111,9 +101,9 @@ class TodoContainer extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    todoColumnList: getColumnsList(state),
     todoCards: getCardsList(state),
     authorName: getCommentsList(state),
+    columnCard: getColumnCardsList(state, props),
   };
 };
 

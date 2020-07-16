@@ -82,7 +82,6 @@ const mapStateToProps = (state, props) => {
   return {
     todoCards: getCardsList(state),
     authorName: getAuthor(state),
-    commentsList: getCommentsList(state),
     cardComments: getCardCommentsList(state, props),
   };
 };

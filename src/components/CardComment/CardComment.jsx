@@ -2,21 +2,13 @@ import React from 'react';
 import EditIcon from '../icons/EditIcon';
 const CardComment = (props) => {
   const comInput = React.createRef();
+
   const addComment = () => {
-    let comId = props.commentId;
     if (!comInput.current || comInput.current.value === '') {
-      return props.deleteCardComment(props.commentId);
+      return props.deleteCardComment();
     } else {
-      props.addCommentText(comInput.current.value, comId);
+      props.addCommentText(comInput.current.value);
     }
-  };
-
-  const editComment = () => {
-    props.editCardComment(props.commentId);
-  };
-
-  const deleteComment = () => {
-    props.deleteCardComment(props.commentId);
   };
 
   return (
@@ -28,10 +20,10 @@ const CardComment = (props) => {
             <div className="card-info__comment-text">{props.commentText}</div>
           </div>
           <div className="card-info_comment-icons">
-            <span className="edit-icon comments" onClick={editComment}>
+            <span className="edit-icon comments" onClick={props.editCardComment}>
               <EditIcon />
             </span>
-            <span className="delete-icon comments" onClick={deleteComment}>
+            <span className="delete-icon comments" onClick={props.deleteCardComment}>
               &times;
             </span>
           </div>

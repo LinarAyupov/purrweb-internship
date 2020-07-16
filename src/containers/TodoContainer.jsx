@@ -69,6 +69,7 @@ class TodoContainer extends React.Component {
         key={card.key}
         colTitle={this.props.column.title}
         card={card}
+        cardId={card.cardId}
       />
     ));
   };

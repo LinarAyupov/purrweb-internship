@@ -2,14 +2,9 @@ import React from 'react';
 import CardInfo from '../components/CardInfo';
 import { connect } from 'react-redux';
 import { setCardDescr, editCardDescr, deleteCardDescr } from '../actions/cardsActions';
-import {
-  editCardComment,
-  deleteComment,
-  setCardComments,
-  setCardCommentText,
-} from '../actions/commentActions';
-import CardComment from '../components/CardComment/CardComment';
+import { setCardComments } from '../actions/commentActions';
 import { getCommentsList, getCardCommentsList } from '../selectors/selectors';
+import CommentContainer from './CommentContainer';
 
 class CardInfoContainer extends React.Component {
   constructor(props) {
@@ -60,36 +55,16 @@ class CardInfoContainer extends React.Component {
     this.props.setCardComments(commentItem);
   };
 
-  addCommentText = (comText, comId) => {
-    let commentText = comText;
-    const colId = this.props.colId;
-    const cardId = this.props.cardId;
-    const commentId = comId;
-    this.props.setCardCommentText(colId, cardId, commentId, commentText);
-  };
-
-  editCardComment = (comId) => {
-    const colId = this.props.colId;
-    const cardId = this.props.cardId;
-    this.props.editCardComment(colId, cardId, comId);
-  };
-
-  deleteCardComment = (comId) => {
-    const colId = this.props.colId;
-    const cardId = this.props.cardId;
-    this.props.deleteComment(colId, cardId, comId);
-  };
-
   showCardComments = () => {
     return this.props.cardComments.map((comment) => {
       return (
-        <CardComment
+        <CommentContainer
           commentText={comment.text}
           isCommentActive={comment.isCommentActive}
           commentId={comment.comId}
-          addCommentText={this.addCommentText}
-          editCardComment={this.editCardComment}
-          deleteCardComment={this.deleteCardComment}
+          colId={this.props.colId}
+          cardId={this.props.cardId}
+          comId={comment.comId}
           key={comment.key}
           authorName={this.props.authorName}
         />
@@ -133,9 +108,6 @@ const mapDispatchToProps = {
   editCardDescr,
   deleteCardDescr,
   setCardComments,
-  setCardCommentText,
-  editCardComment,
-  deleteComment,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardInfoContainer);

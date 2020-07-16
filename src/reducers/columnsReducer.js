@@ -63,9 +63,7 @@ const actionMap = {
         if (col.id === action.columnId) {
           return {
             ...col,
-            isEditColumnTitle: col.isEditColumnTitle
-              ? (col.isEditColumnTitle = false)
-              : (col.isEditColumnTitle = true),
+            isEditColumnTitle: col.isEditColumnTitle ? false : true,
             isColumnActive: true,
           };
         } else {

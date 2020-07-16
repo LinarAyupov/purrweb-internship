@@ -4,40 +4,37 @@ import {
   INSERT_NEW_COLUMN_TITLE,
   DELETE_TODO_COLUMN,
   OPEN_LIST_MENU,
-} from "../reducers/columnsReducer"
-
-
-
+} from '../reducers/columnsReducer';
 
 export const setTodoColumn = (todoColumn) => {
   return {
     type: SET_TODO_COLUMN,
-    todoColumn
-  }
-}
+    todoColumn,
+  };
+};
 export const setColumnTitle = (newTitle, columnId) => {
   return {
     type: SET_COLUMN_TITLE,
     newTitle,
-    columnId
-  }
-}
+    columnId,
+  };
+};
 export const insertNewColumnTitle = (columnId) => {
   return {
     type: INSERT_NEW_COLUMN_TITLE,
-    columnId
-  }
-}
+    columnId,
+  };
+};
 export const deleteToDoColumn = (columnId) => {
   return {
     type: DELETE_TODO_COLUMN,
-    columnId
-  }
-}
+    columnId,
+  };
+};
 
 export const openListMenu = (columnId) => {
   return {
     type: OPEN_LIST_MENU,
-    columnId
-  }
-}
+    columnId,
+  };
+};

@@ -15,18 +15,12 @@ import { getAuthor, getCardsList, getCommentsList } from '../selectors/selectors
 class TodoCardContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.card = {};
-    this.props.todoCards.forEach((card) => {
-      if (card.colId === this.props.columnId && card.cardId === this.props.cardId) {
-        this.card = card;
-      }
-    });
     this.commentsCount = 0;
   }
 
   UNSAFE_componentWillMount() {
     this.props.commentsList.forEach((comment) => {
-      if (comment.colId === this.props.columnId && comment.cardId === this.props.cardId) {
+      if (comment.colId === this.props.columnId && comment.cardId === this.props.card.cardId) {
         this.commentsCount++;
       }
     });
@@ -35,59 +29,59 @@ class TodoCardContainer extends React.Component {
   componentDidUpdate() {
     this.commentsCount = 0;
     this.props.commentsList.forEach((comment) => {
-      if (comment.colId === this.props.columnId && comment.cardId === this.props.cardId) {
+      if (comment.colId === this.props.columnId && comment.cardId === this.props.card.cardId) {
         this.commentsCount++;
       }
     });
   }
 
   editCardTitle = (e) => {
-    const cardId = this.card.cardId;
+    const cardId = this.props.card.cardId;
     let newTitle = e.target.value;
     this.props.setNewCardTitle(cardId, newTitle);
   };
 
   insertCardTitle = () => {
-    this.props.insertCardTitle(this.card.cardId);
+    this.props.insertCardTitle(this.props.card.cardId);
   };
 
   deleteCard = () => {
-    this.props.deleteCard(this.card.cardId);
-    this.props.deleteAllCommentsInsideCard(this.card.cardId);
+    this.props.deleteCard(this.props.card.cardId);
+    this.props.deleteAllCommentsInsideCard(this.props.card.cardId);
   };
 
   renderCardInfoWindow = (e) => {
-    this.props.showCardInfo(this.card.cardId, this.card.colId);
+    this.props.showCardInfo(this.props.card.cardId, this.props.card.colId);
   };
 
   render() {
     return (
       <>
         <TodoCard
-          cardTitle={this.card.title}
-          isCardActive={this.card.isCardActive}
+          cardTitle={this.props.card.title}
+          isCardActive={this.props.card.isCardActive}
           editCardTitle={this.editCardTitle}
           insertCardTitle={this.insertCardTitle}
           renderCardInfoWindow={this.renderCardInfoWindow}
-          haveDescr={this.card.haveDescr}
-          isShowInfo={this.card.isShowInfo}
+          haveDescr={this.props.card.haveDescr}
+          isShowInfo={this.props.card.isShowInfo}
           haveComment={this.commentsCount !== 0 ? true : false}
           commentsCount={this.commentsCount}
         />
-        {this.card.isShowInfo ? (
+        {this.props.card.isShowInfo ? (
           ReactDOM.createPortal(
             <CardInfoContainer
               colTitle={this.props.colTitle}
-              cardTitle={this.card.title}
+              cardTitle={this.props.card.title}
               authorName={this.props.authorName}
               renderCardInfoWindow={this.renderCardInfoWindow}
-              cardId={this.card.cardId}
-              colId={this.card.colId}
-              cardDescr={this.card.description}
-              haveDescr={this.card.haveDescr}
+              cardId={this.props.card.cardId}
+              colId={this.props.card.colId}
+              cardDescr={this.props.card.description}
+              haveDescr={this.props.card.haveDescr}
               insertCardTitle={this.insertCardTitle}
               editCardTitle={this.editCardTitle}
-              isCardActive={this.card.isCardActive}
+              isCardActive={this.props.card.isCardActive}
               deleteCard={this.deleteCard}
               key={this.props.key}
             />,

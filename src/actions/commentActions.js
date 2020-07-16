@@ -4,16 +4,15 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT,
   DELETE_COMMENTS_WITH_CARD_ID,
-  DELETE_COMMENTS_WITH_COL_ID
-} from "../reducers/commentReducer"
-
+  DELETE_COMMENTS_WITH_COL_ID,
+} from '../reducers/commentReducer';
 
 export const setCardComments = (commentItem) => {
   return {
     type: SET_COMMENT,
-    commentItem
-  }
-}
+    commentItem,
+  };
+};
 
 export const setCardCommentText = (colId, cardId, commentId, commentText) => {
   return {
@@ -21,34 +20,34 @@ export const setCardCommentText = (colId, cardId, commentId, commentText) => {
     colId,
     cardId,
     commentId,
-    commentText
-  }
-}
+    commentText,
+  };
+};
 export const editCardComment = (colId, cardId, commentId) => {
   return {
     type: EDIT_COMMENT,
     colId,
     cardId,
-    commentId
-  }
-}
+    commentId,
+  };
+};
 export const deleteComment = (colId, cardId, commentId) => {
   return {
     type: DELETE_COMMENT,
     colId,
     cardId,
-    commentId
-  }
-}
+    commentId,
+  };
+};
 export const deleteAllCommentsInsideCard = (cardId) => {
   return {
     type: DELETE_COMMENTS_WITH_CARD_ID,
-    cardId
-  }
-}
-export const deleteAllCommentsInsideCollumn = (colId) => {
+    cardId,
+  };
+};
+export const deleteAllCommentsInsideColumn = (colId) => {
   return {
     type: DELETE_COMMENTS_WITH_COL_ID,
-    colId
-  }
-}
+    colId,
+  };
+};

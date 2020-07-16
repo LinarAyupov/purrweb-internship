@@ -9,7 +9,7 @@ class BoardContainer extends React.Component {
     let columnListLength = this.props.todoColumnList.length;
     if (columnListLength !== 0) {
       return this.props.todoColumnList.map((column) => (
-        <TodoContainer columnId={column.id} key={column.key} />
+        <TodoContainer key={column.key} column={column} />
       ));
     }
   };
@@ -41,7 +41,6 @@ class BoardContainer extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     todoColumnList: getColumnsList(state),
     todoCards: getCardsList(state),

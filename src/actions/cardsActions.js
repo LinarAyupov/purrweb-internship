@@ -7,71 +7,68 @@ import {
   EDIT_CARD_DESCR,
   DELETE_CARD_DESCR,
   DELETE_CARD,
-  DELETE_CARD_WITH_COL_ID
-} from "../reducers/cardsReducer"
-
+  DELETE_CARD_WITH_COL_ID,
+} from '../reducers/cardsReducer';
 
 export const setNewTodoCard = (cardItem) => {
   return {
     type: SET_TODO_CARD,
-    cardItem
-  }
-}
+    cardItem,
+  };
+};
 export const setNewCardTitle = (cardId, newTitle) => {
   return {
     type: SET_NEW_CARD_TITLE,
     cardId,
-    newTitle
-  }
-}
+    newTitle,
+  };
+};
 export const insertCardTitle = (cardId) => {
   return {
     type: INSERT_CARD_TITLE,
-    cardId
-  }
-}
+    cardId,
+  };
+};
 export const showCardInfo = (cardId, colId) => {
   return {
     type: SHOW_CARD_INFO,
     cardId,
-    colId
-  }
-}
+    colId,
+  };
+};
 export const setCardDescr = (descrText, cardId, colId) => {
   return {
     type: SET_CARD_DESCR,
     descrText,
     cardId,
-    colId
-  }
-}
-
+    colId,
+  };
+};
 
 export const editCardDescr = (cardId, colId) => {
   return {
     type: EDIT_CARD_DESCR,
     cardId,
-    colId
-  }
-}
+    colId,
+  };
+};
 export const deleteCardDescr = (cardId, colId) => {
   return {
     type: DELETE_CARD_DESCR,
     cardId,
-    colId
-  }
-}
+    colId,
+  };
+};
 export const deleteCard = (cardId) => {
   return {
     type: DELETE_CARD,
-    cardId
-  }
-
-}
+    cardId,
+  };
+};
 
 export const deleteCardsWithColID = (colId) => {
   return {
     type: DELETE_CARD_WITH_COL_ID,
-    colId
-  }
-}
+    colId,
+  };
+};

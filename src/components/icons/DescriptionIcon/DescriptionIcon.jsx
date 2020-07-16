@@ -1,9 +1,9 @@
-import * as React from "react"
+import * as React from 'react';
 
 function DescriptionIcon(props) {
   return (
     <svg width={16} height={20} viewBox="0 0 16 20" {...props}>
-      <title>{"description"}</title>
+      <title>{'description'}</title>
       <g fill="none" fillRule="evenodd">
         <path d="M-4-2h24v24H-4z" />
         <path
@@ -12,7 +12,7 @@ function DescriptionIcon(props) {
         />
       </g>
     </svg>
-  )
+  );
 }
 
-export default DescriptionIcon
+export default DescriptionIcon;

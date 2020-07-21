@@ -3,41 +3,42 @@ import Todo from '../components/Todo';
 import { connect } from 'react-redux';
 import {
   setColumnTitle,
-  insertNewColumnTitle,
-  openListMenu,
-  deleteToDoColumn,
+  insertColumnTitle,
+  toggleColumnMenu,
+  deleteColumn,
 } from '../actions/columnsActions';
-import { setNewTodoCard, deleteCardsWithColID } from '../actions/cardsActions';
+import { setColumnCard, deleteCardsWithColID } from '../actions/cardsActions';
 import { deleteAllCommentsInsideColumn } from '../actions/commentActions';
-import TodoCardContainer from '../containers/TodoCardContainer';
 import { getCardsList, getCommentsList, getColumnCardsList } from '../selectors/selectors';
 
 class TodoContainer extends React.Component {
   getCardActiveStatus = () => {
     let cardActiveState = true;
-    if (this.props.todoCards.length !== 0) {
-      cardActiveState = this.props.todoCards[this.props.todoCards.length - 1].isCardActive;
+    if (this.props.cardsList.length !== 0) {
+      cardActiveState = this.props.cardsList[this.props.cardsList.length - 1].isCardActive;
     }
     return cardActiveState;
   };
 
   onChangeColumTitle = (element) => {
-    let newTitle = element.target.value;
-    this.props.setColumnTitle(newTitle, this.props.column.id);
+    let title = element.target.value;
+    const { id: columnId } = this.props.column;
+    this.props.setColumnTitle({ title, columnId });
   };
 
-  insertNewColumnTitle = () => {
-    if (this.props.column.title === '') {
+  insertColumnTitle = () => {
+    let { title: columnTitle, id: columnId } = this.props.column;
+    if (columnTitle === '') {
       this.props.column.title = 'Todo list';
-      this.props.insertNewColumnTitle(this.props.column.id);
+      this.props.insertColumnTitle({ columnId });
     } else {
-      this.props.insertNewColumnTitle(this.props.column.id);
+      this.props.insertColumnTitle({ columnId });
     }
   };
 
-  addNewToDoCard = () => {
+  addCard = () => {
     let newId = 0;
-    this.props.todoCards.forEach((item) => {
+    this.props.cardsList.forEach((item) => {
       let itemId = Number(item.cardId);
       if (itemId >= newId) {
         newId = itemId + 1;
@@ -53,29 +54,19 @@ class TodoContainer extends React.Component {
       haveDescr: false,
       description: '',
     };
-    this.props.setNewTodoCard(cardItem);
+    this.props.setColumnCard({ cardItem });
   };
 
-  deleteTodoList = () => {
-    this.props.deleteToDoColumn(this.props.column.id);
-    this.props.deleteCardsWithColID(this.props.column.id);
-    this.props.deleteAllCommentsInsideColumn(this.props.column.id);
+  deleteColumn = () => {
+    const { id: colId } = this.props.column;
+    this.props.deleteColumn({ colId });
+    this.props.deleteCardsWithColID({ colId });
+    this.props.deleteAllCommentsInsideColumn({ colId });
   };
 
-  renderTodoCardList = () => {
-    return this.props.columnCard.map((card) => (
-      <TodoCardContainer
-        columnId={this.props.column.id}
-        key={card.key}
-        colTitle={this.props.column.title}
-        card={card}
-        cardId={card.cardId}
-      />
-    ));
-  };
-
-  openMenu = () => {
-    this.props.openListMenu(this.props.column.id);
+  toggleMenu = () => {
+    const { id: columnId } = this.props.column;
+    this.props.toggleColumnMenu({ columnId });
   };
 
   render() {
@@ -84,16 +75,17 @@ class TodoContainer extends React.Component {
         <Todo
           authorName={this.props.authorName}
           isEditColumnTitle={this.props.column.isEditColumnTitle}
+          columnCards={this.props.columnCards}
+          columnId={this.props.column.id}
           columnTitle={this.props.column.title}
           onChangeColumTitle={this.onChangeColumTitle}
-          insertNewColumnTitle={this.insertNewColumnTitle}
+          insertColumnTitle={this.insertColumnTitle}
           isColumnActive={this.props.column.isColumnActive}
-          addNewToDoCard={this.addNewToDoCard}
-          renderTodoCardList={this.renderTodoCardList}
+          addCard={this.addCard}
           isCardActive={this.getCardActiveStatus()}
-          openMenu={this.openMenu}
+          toggleMenu={this.toggleMenu}
           isMenuActive={this.props.column.isMenuActive}
-          deleteTodoList={this.deleteTodoList}
+          deleteColumn={this.deleteColumn}
         />
       </>
     );
@@ -102,18 +94,18 @@ class TodoContainer extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    todoCards: getCardsList(state),
+    cardsList: getCardsList(state),
     authorName: getCommentsList(state),
-    columnCard: getColumnCardsList(state, props),
+    columnCards: getColumnCardsList(state, props),
   };
 };
 
 const mapDispatchToProps = {
   setColumnTitle,
-  insertNewColumnTitle,
-  setNewTodoCard,
-  openListMenu,
-  deleteToDoColumn,
+  insertColumnTitle,
+  setColumnCard,
+  toggleColumnMenu,
+  deleteColumn,
   deleteCardsWithColID,
   deleteAllCommentsInsideColumn,
 };

@@ -2,39 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoCard from '../components/TodoCard';
 import { connect } from 'react-redux';
-import {
-  setNewCardTitle,
-  insertCardTitle,
-  showCardInfo,
-  deleteCard,
-} from '../actions/cardsActions';
+import { setCardTitle, insertCardTitle, showCardInfo, deleteCard } from '../actions/cardsActions';
 import { deleteAllCommentsInsideCard } from '../actions/commentActions';
 import CardInfoContainer from '../containers/CardInfoContainer';
-import {
-  getAuthor,
-  getCardsList,
-  getCommentsList,
-  getCardCommentsList,
-} from '../selectors/selectors';
+import { getAuthor, getCardCommentsList } from '../selectors/selectors';
 
 class TodoCardContainer extends React.Component {
   editCardTitle = (e) => {
-    const cardId = this.props.card.cardId;
     let newTitle = e.target.value;
-    this.props.setNewCardTitle(cardId, newTitle);
+    this.props.setCardTitle({ cardId: this.props.card.cardId, newTitle });
   };
 
   insertCardTitle = () => {
-    this.props.insertCardTitle(this.props.card.cardId);
+    this.props.insertCardTitle({ cardId: this.props.card.cardId });
   };
 
   deleteCard = () => {
-    this.props.deleteCard(this.props.card.cardId);
-    this.props.deleteAllCommentsInsideCard(this.props.card.cardId);
+    const cardId = this.props.card.cardId;
+    this.props.deleteCard({ cardId });
+    this.props.deleteAllCommentsInsideCard({ cardId });
   };
 
   toggleCardInfoWindow = (e) => {
-    this.props.showCardInfo(this.props.card.cardId, this.props.card.colId);
+    const { cardId, colId } = this.props.card;
+    this.props.showCardInfo({ cardId, colId });
   };
 
   render() {
@@ -80,14 +71,13 @@ class TodoCardContainer extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    todoCards: getCardsList(state),
     authorName: getAuthor(state),
     cardComments: getCardCommentsList(state, props),
   };
 };
 
 const mapDispatchToProps = {
-  setNewCardTitle,
+  setCardTitle,
   insertCardTitle,
   showCardInfo,
   deleteCard,

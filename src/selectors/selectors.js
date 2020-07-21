@@ -4,7 +4,7 @@ export const getAuthor = (state) => {
   return state.authData.authorName;
 };
 export const getColumnsList = (state) => {
-  return state.columnsData.todoColumnList;
+  return state.columnsData.columnList;
 };
 
 export const getCardsList = (state) => {

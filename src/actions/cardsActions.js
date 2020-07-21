@@ -1,6 +1,6 @@
 import {
-  SET_TODO_CARD,
-  SET_NEW_CARD_TITLE,
+  SET_COLUMN_CARD,
+  SET_CARD_TITLE,
   INSERT_CARD_TITLE,
   SHOW_CARD_INFO,
   SET_CARD_DESCR,
@@ -10,65 +10,75 @@ import {
   DELETE_CARD_WITH_COL_ID,
 } from '../reducers/cardsReducer';
 
-export const setNewTodoCard = (cardItem) => {
+export const setColumnCard = ({ cardItem }) => {
   return {
-    type: SET_TODO_CARD,
-    cardItem,
+    type: SET_COLUMN_CARD,
+    payload: { cardItem },
   };
 };
-export const setNewCardTitle = (cardId, newTitle) => {
+export const setCardTitle = ({ cardId, newTitle }) => {
   return {
-    type: SET_NEW_CARD_TITLE,
-    cardId,
-    newTitle,
+    type: SET_CARD_TITLE,
+    payload: {
+      cardId,
+      newTitle,
+    },
   };
 };
-export const insertCardTitle = (cardId) => {
+export const insertCardTitle = ({ cardId }) => {
   return {
     type: INSERT_CARD_TITLE,
-    cardId,
+    payload: { cardId },
   };
 };
-export const showCardInfo = (cardId, colId) => {
+export const showCardInfo = ({ cardId, colId }) => {
   return {
     type: SHOW_CARD_INFO,
-    cardId,
-    colId,
+    payload: {
+      cardId,
+      colId,
+    },
   };
 };
-export const setCardDescr = (descrText, cardId, colId) => {
+export const setCardDescr = ({ descrText, cardId, colId }) => {
   return {
     type: SET_CARD_DESCR,
-    descrText,
-    cardId,
-    colId,
+    payload: {
+      descrText,
+      cardId,
+      colId,
+    },
   };
 };
 
-export const editCardDescr = (cardId, colId) => {
+export const editCardDescr = ({ cardId, colId }) => {
   return {
     type: EDIT_CARD_DESCR,
-    cardId,
-    colId,
+    payload: {
+      cardId,
+      colId,
+    },
   };
 };
-export const deleteCardDescr = (cardId, colId) => {
+export const deleteCardDescr = ({ cardId, colId }) => {
   return {
     type: DELETE_CARD_DESCR,
-    cardId,
-    colId,
+    payload: {
+      cardId,
+      colId,
+    },
   };
 };
-export const deleteCard = (cardId) => {
+export const deleteCard = ({ cardId }) => {
   return {
     type: DELETE_CARD,
-    cardId,
+    payload: { cardId },
   };
 };
 
-export const deleteCardsWithColID = (colId) => {
+export const deleteCardsWithColID = ({ colId }) => {
   return {
     type: DELETE_CARD_WITH_COL_ID,
-    colId,
+    payload: { colId },
   };
 };

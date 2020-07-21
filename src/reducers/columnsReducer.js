@@ -1,11 +1,11 @@
-export const SET_TODO_COLUMN = 'SET-TODO-COLUMN';
+export const SET_COLUMN = 'SET-COLUMN';
 export const SET_COLUMN_TITLE = 'SET-COLUMN-TITLE';
-export const INSERT_NEW_COLUMN_TITLE = 'INSERT-NEW-COLUMN-TITLE';
-export const DELETE_TODO_COLUMN = 'DELETE-TODO-COLUMN';
-export const OPEN_LIST_MENU = 'OPEN-LIST-MENU';
+export const INSERT_COLUMN_TITLE = 'INSERT-COLUMN-TITLE';
+export const DELETE_COLUMN = 'DELETE-COLUMN';
+export const TOGGLE_COLUMN_MENU = 'TOGGLE-COLUMN-MENU';
 
 let initialState = {
-  todoColumnList: [
+  columnList: [
     {
       id: 0,
       key: 4340,
@@ -42,25 +42,25 @@ let initialState = {
 };
 
 const actionMap = {
-  [SET_TODO_COLUMN]: (state, action) => {
+  [SET_COLUMN]: (state, action) => {
     return {
       ...state,
-      todoColumnList: [...state.todoColumnList, action.todoColumn],
+      columnList: [...state.columnList, action.payload.columnData],
     };
   },
   [SET_COLUMN_TITLE]: (state, action) => {
     return {
       ...state,
-      todoColumnList: state.todoColumnList.map((col) =>
-        col.id === action.columnId ? { ...col, title: action.newTitle } : col
+      columnList: state.columnList.map((col) =>
+        col.id === action.payload.columnId ? { ...col, title: action.payload.title } : col
       ),
     };
   },
-  [INSERT_NEW_COLUMN_TITLE]: (state, action) => {
+  [INSERT_COLUMN_TITLE]: (state, action) => {
     return {
       ...state,
-      todoColumnList: state.todoColumnList.map((col) => {
-        if (col.id === action.columnId) {
+      columnList: state.columnList.map((col) => {
+        if (col.id === action.payload.columnId) {
           return {
             ...col,
             isEditColumnTitle: col.isEditColumnTitle ? false : true,
@@ -72,17 +72,17 @@ const actionMap = {
       }),
     };
   },
-  [DELETE_TODO_COLUMN]: (state, action) => {
+  [DELETE_COLUMN]: (state, action) => {
     return {
       ...state,
-      todoColumnList: [...state.todoColumnList.filter((item) => item.id !== action.columnId)],
+      columnList: state.columnList.filter((item) => item.id !== action.payload.colId),
     };
   },
-  [OPEN_LIST_MENU]: (state, action) => {
+  [TOGGLE_COLUMN_MENU]: (state, action) => {
     return {
       ...state,
-      todoColumnList: state.todoColumnList.map((col) =>
-        col.id === action.columnId
+      columnList: state.columnList.map((col) =>
+        col.id === action.payload.columnId
           ? {
               ...col,
               isMenuActive: col.isMenuActive

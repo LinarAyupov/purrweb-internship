@@ -1,29 +1,19 @@
 import React from 'react';
 import Board from '../components/Board';
-import { setTodoColumn } from '../actions/columnsActions';
+import { setColumn } from '../actions/columnsActions';
 import { connect } from 'react-redux';
-import TodoContainer from '../containers/TodoContainer';
-import { getColumnsList, getCardsList } from '../selectors/selectors';
+import { getColumnsList } from '../selectors/selectors';
 class BoardContainer extends React.Component {
-  showTodoColumns = () => {
-    let columnListLength = this.props.todoColumnList.length;
-    if (columnListLength !== 0) {
-      return this.props.todoColumnList.map((column) => (
-        <TodoContainer key={column.key} column={column} />
-      ));
-    }
-  };
-
-  addNewTodoColumn = () => {
+  addColumn = () => {
     let newId = 0;
-    this.props.todoColumnList.forEach((item) => {
+    this.props.columnsList.forEach((item) => {
       let itemId = Number(item.id);
       if (itemId >= newId) {
         newId = itemId + 1;
       }
     });
     const newKey = Math.floor(Math.random() * 10000);
-    let defaultColumnData = {
+    let columnData = {
       id: newId,
       key: newKey,
       title: '',
@@ -31,24 +21,21 @@ class BoardContainer extends React.Component {
       isEditColumnTitle: true,
       isMenuActive: false,
     };
-    this.props.setTodoColumn(defaultColumnData);
+    this.props.setColumn({ columnData });
   };
 
   render() {
-    return (
-      <Board addNewTodoColumn={this.addNewTodoColumn} showTodoColumns={this.showTodoColumns} />
-    );
+    return <Board addColumn={this.addColumn} columnsList={this.props.columnsList} />;
   }
 }
 const mapStateToProps = (state) => {
   return {
-    todoColumnList: getColumnsList(state),
-    todoCards: getCardsList(state),
+    columnsList: getColumnsList(state),
   };
 };
 
 const mapDispatchToProps = {
-  setTodoColumn,
+  setColumn,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);

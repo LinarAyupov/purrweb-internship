@@ -5,7 +5,7 @@ const CardComment = (props) => {
 
   const addComment = () => {
     if (!comInput.current || comInput.current.value === '') {
-      return props.deleteCardComment();
+      return props.deleteComment();
     } else {
       props.addCommentText(comInput.current.value);
     }
@@ -20,10 +20,10 @@ const CardComment = (props) => {
             <div className="card-info__comment-text">{props.commentText}</div>
           </div>
           <div className="card-info_comment-icons">
-            <span className="edit-icon comments" onClick={props.editCardComment}>
+            <span className="edit-icon comments" onClick={props.editComment}>
               <EditIcon />
             </span>
-            <span className="delete-icon comments" onClick={props.deleteCardComment}>
+            <span className="delete-icon comments" onClick={props.deleteComment}>
               &times;
             </span>
           </div>

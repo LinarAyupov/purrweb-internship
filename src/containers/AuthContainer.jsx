@@ -12,7 +12,7 @@ class AuthContainer extends React.Component {
   addAuthor = () => {
     if (this.inputRef.current) {
       let authorName = this.inputRef.current.value;
-      this.props.setAuthorName(authorName);
+      this.props.setAuthorName({ authorName });
     } else {
       return null;
     }

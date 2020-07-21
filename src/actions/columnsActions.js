@@ -1,40 +1,44 @@
 import {
-  SET_TODO_COLUMN,
+  SET_COLUMN,
   SET_COLUMN_TITLE,
-  INSERT_NEW_COLUMN_TITLE,
-  DELETE_TODO_COLUMN,
-  OPEN_LIST_MENU,
+  INSERT_COLUMN_TITLE,
+  DELETE_COLUMN,
+  TOGGLE_COLUMN_MENU,
 } from '../reducers/columnsReducer';
 
-export const setTodoColumn = (todoColumn) => {
+export const setColumn = ({ columnData }) => {
   return {
-    type: SET_TODO_COLUMN,
-    todoColumn,
+    type: SET_COLUMN,
+    payload: {
+      columnData,
+    },
   };
 };
-export const setColumnTitle = (newTitle, columnId) => {
+export const setColumnTitle = ({ title, columnId }) => {
   return {
     type: SET_COLUMN_TITLE,
-    newTitle,
-    columnId,
+    payload: {
+      title,
+      columnId,
+    },
   };
 };
-export const insertNewColumnTitle = (columnId) => {
+export const insertColumnTitle = ({ columnId }) => {
   return {
-    type: INSERT_NEW_COLUMN_TITLE,
-    columnId,
+    type: INSERT_COLUMN_TITLE,
+    payload: { columnId },
   };
 };
-export const deleteToDoColumn = (columnId) => {
+export const deleteColumn = ({ colId }) => {
   return {
-    type: DELETE_TODO_COLUMN,
-    columnId,
+    type: DELETE_COLUMN,
+    payload: { colId },
   };
 };
 
-export const openListMenu = (columnId) => {
+export const toggleColumnMenu = ({ columnId }) => {
   return {
-    type: OPEN_LIST_MENU,
-    columnId,
+    type: TOGGLE_COLUMN_MENU,
+    payload: { columnId },
   };
 };

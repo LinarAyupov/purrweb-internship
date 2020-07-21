@@ -1,25 +1,22 @@
 import React from 'react';
 import CardComment from '../components/CardComment/CardComment';
-import { editCardComment, deleteComment, setCardCommentText } from '../actions/commentActions';
+import { editComment, deleteComment, setCardCommentText } from '../actions/commentActions';
 import { connect } from 'react-redux';
 class CommentContainer extends React.Component {
   addCommentText = (comText) => {
     let commentText = comText;
-    const colId = this.props.colId;
-    const cardId = this.props.cardId;
-    this.props.setCardCommentText(colId, cardId, this.props.comId, commentText);
+    const { colId, cardId, commentId } = this.props;
+    this.props.setCardCommentText({ colId, cardId, commentId, commentText });
   };
 
-  editCardComment = () => {
-    const colId = this.props.colId;
-    const cardId = this.props.cardId;
-    this.props.editCardComment(colId, cardId, this.props.comId);
+  editComment = () => {
+    const { colId, cardId, commentId } = this.props;
+    this.props.editComment({ colId, cardId, commentId });
   };
 
-  deleteCardComment = () => {
-    const colId = this.props.colId;
-    const cardId = this.props.cardId;
-    this.props.deleteComment(colId, cardId, this.props.comId);
+  deleteComment = () => {
+    const { colId, cardId, commentId } = this.props;
+    this.props.deleteComment({ colId, cardId, commentId });
   };
 
   render() {
@@ -29,8 +26,8 @@ class CommentContainer extends React.Component {
         isCommentActive={this.props.isCommentActive}
         authorName={this.props.authorName}
         addCommentText={this.addCommentText}
-        deleteCardComment={this.deleteCardComment}
-        editCardComment={this.editCardComment}
+        deleteComment={this.deleteComment}
+        editComment={this.editComment}
       />
     );
   }
@@ -38,7 +35,7 @@ class CommentContainer extends React.Component {
 
 const mapDispatchToProps = {
   setCardCommentText,
-  editCardComment,
+  editComment,
   deleteComment,
 };
 

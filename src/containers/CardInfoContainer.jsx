@@ -2,9 +2,8 @@ import React from 'react';
 import CardInfo from '../components/CardInfo';
 import { connect } from 'react-redux';
 import { setCardDescr, editCardDescr, deleteCardDescr } from '../actions/cardsActions';
-import { setCardComments } from '../actions/commentActions';
+import { setComment } from '../actions/commentActions';
 import { getCommentsList, getCardCommentsList } from '../selectors/selectors';
-import CommentContainer from './CommentContainer';
 
 class CardInfoContainer extends React.Component {
   constructor(props) {
@@ -12,17 +11,20 @@ class CardInfoContainer extends React.Component {
     this.descrInputRef = React.createRef();
   }
 
-  addNewDescription = () => {
+  addDescription = () => {
     let descrText = this.descrInputRef.current.value;
-    this.props.setCardDescr(descrText, this.props.cardId, this.props.colId);
+    const { cardId, colId } = this.props;
+    this.props.setCardDescr({ descrText, cardId, colId });
   };
 
-  editCardDescription = () => {
-    this.props.editCardDescr(this.props.cardId, this.props.colId);
+  editDescription = () => {
+    const { cardId, colId } = this.props;
+    this.props.editCardDescr({ cardId, colId });
   };
 
   deleteDescription = () => {
-    this.props.deleteCardDescr(this.props.cardId, this.props.colId);
+    const { cardId, colId } = this.props;
+    this.props.deleteCardDescr({ cardId, colId });
   };
 
   getCommentActiveState = () => {
@@ -33,12 +35,12 @@ class CardInfoContainer extends React.Component {
     return commentActive;
   };
 
-  addCardComment = () => {
-    let newComId = 0;
+  addComment = () => {
+    let newCommentId = 0;
     this.props.commentsList.forEach((comment) => {
-      let commId = Number(comment.comId);
-      if (commId >= newComId) {
-        newComId = commId + 1;
+      let commentId = Number(comment.commentId);
+      if (commentId >= newCommentId) {
+        newCommentId = commentId + 1;
       }
     });
     let newKey = Math.floor(Math.random() * 10000);
@@ -47,46 +49,31 @@ class CardInfoContainer extends React.Component {
     const commentItem = {
       colId: colId,
       cardId: cardId,
-      comId: newComId,
+      commentId: newCommentId,
       key: newKey,
       isCommentActive: false,
       text: '',
     };
-    this.props.setCardComments(commentItem);
-  };
-
-  showCardComments = () => {
-    return this.props.cardComments.map((comment) => {
-      return (
-        <CommentContainer
-          commentText={comment.text}
-          isCommentActive={comment.isCommentActive}
-          commentId={comment.comId}
-          colId={this.props.colId}
-          cardId={this.props.cardId}
-          comId={comment.comId}
-          key={comment.key}
-          authorName={this.props.authorName}
-        />
-      );
-    });
+    this.props.setComment({ commentItem });
   };
 
   render() {
     return (
       <CardInfo
+        colId={this.props.colId}
+        cardId={this.props.cardId}
         authorName={this.props.authorName}
+        cardComments={this.props.cardComments}
         colTitle={this.props.colTitle}
         cardTitle={this.props.cardTitle}
         toggleCardInfoWindow={this.props.toggleCardInfoWindow}
         descrInputRef={this.descrInputRef}
-        addNewDescription={this.addNewDescription}
+        addDescription={this.addDescription}
         cardDescr={this.props.cardDescr}
-        addCardComment={this.addCardComment}
-        showCardComments={this.showCardComments}
+        addComment={this.addComment}
         isCommentAdded={this.getCommentActiveState()}
         haveDescr={this.props.haveDescr}
-        editCardDescription={this.editCardDescription}
+        editDescription={this.editDescription}
         insertCardTitle={this.props.insertCardTitle}
         editCardTitle={this.props.editCardTitle}
         isCardActive={this.props.isCardActive}
@@ -107,7 +94,7 @@ const mapDispatchToProps = {
   setCardDescr,
   editCardDescr,
   deleteCardDescr,
-  setCardComments,
+  setComment,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardInfoContainer);

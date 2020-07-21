@@ -13,17 +13,17 @@ const actionMap = {
   [SET_COMMENT]: (state, action) => {
     return {
       ...state,
-      comments: [...state.comments, action.commentItem],
+      comments: [...state.comments, action.payload.commentItem],
     };
   },
   [SET_COMMENT_TEXT]: (state, action) => {
     return {
       ...state,
       comments: state.comments.map((comment) => {
-        if (comment.comId === action.commentId) {
+        if (comment.commentId === action.payload.commentId) {
           return {
             ...comment,
-            text: action.commentText,
+            text: action.payload.commentText,
             isCommentActive: true,
           };
         } else {
@@ -37,9 +37,9 @@ const actionMap = {
       ...state,
       comments: state.comments.map((comment) => {
         if (
-          comment.colId === action.colId &&
-          comment.cardId === action.cardId &&
-          comment.comId === action.commentId
+          comment.colId === action.payload.colId &&
+          comment.cardId === action.payload.cardId &&
+          comment.commentId === action.payload.commentId
         ) {
           return {
             ...comment,
@@ -56,7 +56,7 @@ const actionMap = {
       ...state,
       comments: [
         ...state.comments.filter((comment) => {
-          if (comment.comId !== action.commentId) return comment;
+          if (comment.commentId !== action.payload.commentId) return comment;
         }),
       ],
     };
@@ -66,7 +66,7 @@ const actionMap = {
       ...state,
       comments: [
         ...state.comments.filter((comment) => {
-          if (comment.cardId !== action.cardId) return comment;
+          if (comment.cardId !== action.payload.cardId) return comment;
         }),
       ],
     };
@@ -76,7 +76,7 @@ const actionMap = {
       ...state,
       comments: [
         ...state.comments.filter((comment) => {
-          if (comment.colId !== action.colId) return comment;
+          if (comment.colId !== action.payload.colId) return comment;
         }),
       ],
     };

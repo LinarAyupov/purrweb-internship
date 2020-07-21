@@ -7,47 +7,53 @@ import {
   DELETE_COMMENTS_WITH_COL_ID,
 } from '../reducers/commentReducer';
 
-export const setCardComments = (commentItem) => {
+export const setComment = ({ commentItem }) => {
   return {
     type: SET_COMMENT,
-    commentItem,
+    payload: { commentItem },
   };
 };
 
-export const setCardCommentText = (colId, cardId, commentId, commentText) => {
+export const setCardCommentText = ({ colId, cardId, commentId, commentText }) => {
   return {
     type: SET_COMMENT_TEXT,
-    colId,
-    cardId,
-    commentId,
-    commentText,
+    payload: {
+      colId,
+      cardId,
+      commentId,
+      commentText,
+    },
   };
 };
-export const editCardComment = (colId, cardId, commentId) => {
+export const editComment = ({ colId, cardId, commentId }) => {
   return {
     type: EDIT_COMMENT,
-    colId,
-    cardId,
-    commentId,
+    payload: {
+      colId,
+      cardId,
+      commentId,
+    },
   };
 };
-export const deleteComment = (colId, cardId, commentId) => {
+export const deleteComment = ({ colId, cardId, commentId }) => {
   return {
     type: DELETE_COMMENT,
-    colId,
-    cardId,
-    commentId,
+    payload: {
+      colId,
+      cardId,
+      commentId,
+    },
   };
 };
-export const deleteAllCommentsInsideCard = (cardId) => {
+export const deleteAllCommentsInsideCard = ({ cardId }) => {
   return {
     type: DELETE_COMMENTS_WITH_CARD_ID,
-    cardId,
+    payload: { cardId },
   };
 };
-export const deleteAllCommentsInsideColumn = (colId) => {
+export const deleteAllCommentsInsideColumn = ({ colId }) => {
   return {
     type: DELETE_COMMENTS_WITH_COL_ID,
-    colId,
+    payload: { colId },
   };
 };

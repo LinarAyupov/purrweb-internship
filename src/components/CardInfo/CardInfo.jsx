@@ -1,7 +1,24 @@
 import React from 'react';
 import EditIcon from '../icons/EditIcon';
+import CommentContainer from '../../containers/CommentContainer';
 
 const CardInfo = (props) => {
+  const renderComments = () => {
+    return props.cardComments.map((comment) => {
+      return (
+        <CommentContainer
+          commentText={comment.text}
+          isCommentActive={comment.isCommentActive}
+          commentId={comment.commentId}
+          colId={props.colId}
+          cardId={props.cardId}
+          comId={comment.comId}
+          key={comment.key}
+          authorName={props.authorName}
+        />
+      );
+    });
+  };
   return (
     <>
       <div className="card-info">
@@ -55,7 +72,7 @@ const CardInfo = (props) => {
             <p className="card-info__descr-text">{props.cardDescr}</p>
             {props.haveDescr ? (
               <div className="card-info__icons">
-                <span className="edit-icon descr" onClick={props.editCardDescription}>
+                <span className="edit-icon descr" onClick={props.editDescription}>
                   <EditIcon />
                 </span>
                 <span className="delete-icon" onClick={props.deleteDescription}>
@@ -72,7 +89,7 @@ const CardInfo = (props) => {
                 >
                   {props.cardDescr}
                 </textarea>
-                <button className="add-btn" onClick={props.addNewDescription}>
+                <button className="add-btn" onClick={props.addDescription}>
                   Add description
                 </button>
               </div>
@@ -81,11 +98,11 @@ const CardInfo = (props) => {
           <div className="card-info__comments">
             <div className="card-info__comments-container">
               <h3 className="card-info__comments-title">Comments:</h3>
-              {props.showCardComments()}
+              {renderComments()}
             </div>
             <div className="card-info__comments-items">
               {props.isCommentAdded ? (
-                <button className="add-btn" onClick={props.addCardComment}>
+                <button className="add-btn" onClick={props.addComment}>
                   Add comment
                 </button>
               ) : (
